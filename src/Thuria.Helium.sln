@@ -3,7 +3,37 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28010.2041
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Thuria.Helium.Akka", "Thuria.Helium.Akka\Thuria.Helium.Akka.csproj", "{F1651C73-1F96-4A94-A26B-914566EAA386}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Thuria.Helium.Akka.Tests", "Thuria.Helium.Akka.Tests\Thuria.Helium.Akka.Tests.csproj", "{7FD6C12C-0912-44A7-9333-C08B01179661}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Thuria.Helium.Akka.Core", "Thuria.Helium.Akka.Core\Thuria.Helium.Akka.Core.csproj", "{3B9459D6-62D5-493B-A7BF-30034D6C9D53}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{FD441D49-5C15-4DB4-8868-C666D67CD0EC}"
+	ProjectSection(SolutionItems) = preProject
+		..\.buildSettings.yml = ..\.buildSettings.yml
+		..\readme.md = ..\readme.md
+	EndProjectSection
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F1651C73-1F96-4A94-A26B-914566EAA386}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F1651C73-1F96-4A94-A26B-914566EAA386}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F1651C73-1F96-4A94-A26B-914566EAA386}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F1651C73-1F96-4A94-A26B-914566EAA386}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7FD6C12C-0912-44A7-9333-C08B01179661}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7FD6C12C-0912-44A7-9333-C08B01179661}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7FD6C12C-0912-44A7-9333-C08B01179661}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7FD6C12C-0912-44A7-9333-C08B01179661}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3B9459D6-62D5-493B-A7BF-30034D6C9D53}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3B9459D6-62D5-493B-A7BF-30034D6C9D53}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3B9459D6-62D5-493B-A7BF-30034D6C9D53}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3B9459D6-62D5-493B-A7BF-30034D6C9D53}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection

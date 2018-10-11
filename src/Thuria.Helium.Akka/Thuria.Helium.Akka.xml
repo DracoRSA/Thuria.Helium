@@ -1,0 +1,212 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Thuria.Helium.Akka</name>
+    </assembly>
+    <members>
+        <member name="T:Thuria.Helium.Akka.Actors.HeliumActionActorBase">
+            <summary>
+            Helium Action Actor Base
+            </summary>
+        </member>
+        <member name="M:Thuria.Helium.Akka.Actors.HeliumActionActorBase.#ctor(Thuria.Helium.Akka.Core.HeliumAction)">
+            <summary>
+            Helium Action Actor Base constructor
+            </summary>
+            <param name="heliumAction">Helium Action</param>
+        </member>
+        <member name="P:Thuria.Helium.Akka.Actors.HeliumActionActorBase.HeliumAction">
+            <summary>
+            Helium Action supported by this Actor
+            </summary>
+        </member>
+        <member name="P:Thuria.Helium.Akka.Actors.HeliumActionActorBase.OriginalSender">
+            <summary>
+            Original Sending Actor
+            </summary>
+        </member>
+        <member name="P:Thuria.Helium.Akka.Actors.HeliumActionActorBase.HeliumActionMessage">
+            <summary>
+            Original Helium Action Message
+            </summary>
+        </member>
+        <member name="M:Thuria.Helium.Akka.Actors.HeliumActionActorBase.ReadyToPerformAction">
+            <summary>
+            Make sre the actor is in a state to Perform the required action
+            </summary>
+        </member>
+        <member name="M:Thuria.Helium.Akka.Actors.HeliumActionActorBase.StartHeliumActionProcessing(Thuria.Helium.Akka.Messages.HeliumActionMessage)">
+            <summary>
+            Start the Helium Action Processing
+            </summary>
+        </member>
+        <member name="T:Thuria.Helium.Akka.Actors.HeliumActorBase">
+            <summary>
+            Helium Actor Base
+            </summary>
+        </member>
+        <member name="M:Thuria.Helium.Akka.Actors.HeliumActorBase.#ctor">
+            <summary>
+            Helium Actor Base Constructor
+            </summary>
+        </member>
+        <member name="P:Thuria.Helium.Akka.Actors.HeliumActorBase.ActorLogger">
+            <summary>
+            Actor Logger
+            </summary>
+        </member>
+        <member name="T:Thuria.Helium.Akka.Actors.HeliumConstructSelectSqlQueryActor">
+            <summary>
+            Helium Construct Select SQL Query Actor
+            </summary>
+        </member>
+        <member name="M:Thuria.Helium.Akka.Actors.HeliumConstructSelectSqlQueryActor.#ctor">
+            <summary>
+            Helium Construct Select SQL Query Actor Constructor
+            </summary>
+        </member>
+        <member name="T:Thuria.Helium.Akka.Actors.HeliumConstructSqlQueryActorBase">
+            <summary>
+            Helium Construct SQL Query Base Actor
+            </summary>
+        </member>
+        <member name="M:Thuria.Helium.Akka.Actors.HeliumConstructSqlQueryActorBase.GetWhereConditionsForDataModel(Thuria.Helium.Akka.Core.HeliumAction,System.Object)">
+            <summary>
+            Retrieve the Where Conditions for a given Data Model
+            </summary>
+            <param name="heliumAction">Helium Action</param>
+            <param name="dataModel">Data Model</param>
+            <returns>A string representing the where clause</returns>
+        </member>
+        <member name="T:Thuria.Helium.Akka.Actors.HeliumRetrieveActor">
+            <summary>
+            Retrieve Helium Action Actor
+            </summary>
+        </member>
+        <member name="M:Thuria.Helium.Akka.Actors.HeliumRetrieveActor.#ctor">
+            <summary>
+            Helium Retrieve Actor Constructor
+            </summary>
+        </member>
+        <member name="M:Thuria.Helium.Akka.Actors.HeliumRetrieveActor.StartHeliumActionProcessing(Thuria.Helium.Akka.Messages.HeliumActionMessage)">
+            <inheritdoc />
+        </member>
+        <member name="T:Thuria.Helium.Akka.HeliumActorSystem">
+            <summary>
+            Helium Actor System
+            </summary>
+        </member>
+        <member name="M:Thuria.Helium.Akka.HeliumActorSystem.#ctor(Thuria.Zitidar.Core.IThuriaIocContainer)">
+            <summary>
+            Helium Actor System constructor
+            </summary>
+            <param name="iocContainer"></param>
+        </member>
+        <member name="P:Thuria.Helium.Akka.HeliumActorSystem.Name">
+            <inheritdoc />
+        </member>
+        <member name="M:Thuria.Helium.Akka.HeliumActorSystem.Start">
+            <inheritdoc />
+        </member>
+        <member name="T:Thuria.Helium.Akka.Messages.HeliumActionMessage">
+            <summary>
+            Helium Action Message
+            </summary>
+        </member>
+        <member name="M:Thuria.Helium.Akka.Messages.HeliumActionMessage.#ctor(Thuria.Helium.Akka.Core.HeliumAction,System.Object)">
+            <summary>
+            Helium Action Message Constructor
+            </summary>
+            <param name="heliumAction">Helium Action to perform</param>
+            <param name="dataModel">Action Input Data Model</param>
+        </member>
+        <member name="P:Thuria.Helium.Akka.Messages.HeliumActionMessage.HeliumAction">
+            <summary>
+            Helium Action to be performed
+            </summary>
+        </member>
+        <member name="P:Thuria.Helium.Akka.Messages.HeliumActionMessage.DataModel">
+            <summary>
+            Input Data Model
+            </summary>
+        </member>
+        <member name="T:Thuria.Helium.Akka.Messages.HeliumActionResultMessage">
+            <summary>
+            Helium Action Result Message
+            </summary>
+        </member>
+        <member name="M:Thuria.Helium.Akka.Messages.HeliumActionResultMessage.#ctor(Thuria.Helium.Akka.Core.HeliumActionResult)">
+            <summary>
+            Helium Action Result Message Constructor
+            </summary>
+            <param name="heliumActionResult">Helium Action Result</param>
+        </member>
+        <member name="P:Thuria.Helium.Akka.Messages.HeliumActionResultMessage.HeliumActionResult">
+            <summary>
+            Helium Action Result
+            </summary>
+        </member>
+        <member name="T:Thuria.Helium.Akka.Messages.HeliumConstructSqlQueryMessage">
+            <summary>
+            Helium Construct SQL Query Message
+            </summary>
+        </member>
+        <member name="M:Thuria.Helium.Akka.Messages.HeliumConstructSqlQueryMessage.#ctor(System.Guid,Thuria.Helium.Akka.Core.HeliumAction,System.Object)">
+            <summary>
+            Helium Const SQL Query Message Constructor
+            </summary>
+            <param name="messageId">Unique Message ID</param>
+            <param name="heliumAction">Helium Action</param>
+            <param name="dataModel">Input Data Model</param>
+        </member>
+        <member name="P:Thuria.Helium.Akka.Messages.HeliumConstructSqlQueryMessage.Id">
+            <summary>
+            Actor Message ID
+            </summary>
+        </member>
+        <member name="P:Thuria.Helium.Akka.Messages.HeliumConstructSqlQueryMessage.HeliumAction">
+            <summary>
+            Helium Action
+            </summary>
+        </member>
+        <member name="P:Thuria.Helium.Akka.Messages.HeliumConstructSqlQueryMessage.DataModel">
+            <summary>
+            Data Model
+            </summary>
+        </member>
+        <member name="T:Thuria.Helium.Akka.Messages.HeliumConstructSqlQueryResultMessage">
+            <summary>
+            Helium Construct SQL Query Result Message
+            </summary>
+        </member>
+        <member name="M:Thuria.Helium.Akka.Messages.HeliumConstructSqlQueryResultMessage.#ctor(System.Guid,Thuria.Helium.Akka.Core.HeliumAction,System.Object,System.String)">
+            <summary>
+            Helium Construct SQL Query Result Message
+            </summary>
+            <param name="messageId">Unique Message ID</param>
+            <param name="heliumAction">Helium Action</param>
+            <param name="dataModel">Input data Model</param>
+            <param name="sqlQuery">Created SQL Query</param>
+        </member>
+        <member name="P:Thuria.Helium.Akka.Messages.HeliumConstructSqlQueryResultMessage.Id">
+            <summary>
+            Actor Message ID
+            </summary>
+        </member>
+        <member name="P:Thuria.Helium.Akka.Messages.HeliumConstructSqlQueryResultMessage.HeliumAction">
+            <summary>
+            Helium Action
+            </summary>
+        </member>
+        <member name="P:Thuria.Helium.Akka.Messages.HeliumConstructSqlQueryResultMessage.DataModel">
+            <summary>
+            Input Data Model
+            </summary>
+        </member>
+        <member name="P:Thuria.Helium.Akka.Messages.HeliumConstructSqlQueryResultMessage.SqlQuery">
+            <summary>
+            SQL Query
+            </summary>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <Authors>Johan Dercksen</Authors>
+    <Company>Draco</Company>
+    <Product>Thuria</Product>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>D:\Draco\Thuria.Helium\src\Thuria.Helium.Akka\Thuria.Helium.Akka.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Thuria.Zitidar.Akka" Version="0.0.10-beta" />
+    <PackageReference Include="Thuria.Zitidar.Core" Version="0.0.10-beta" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Models\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Thuria.Helium.Akka.Core\Thuria.Helium.Akka.Core.csproj" />
+  </ItemGroup>
+
+</Project>

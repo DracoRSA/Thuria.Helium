@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="NSubstitute" Version="3.1.0" />
+    <PackageReference Include="NUnit" Version="3.11.0" />
+    <PackageReference Include="NUnit3TestAdapter" Version="3.10.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.9.0" />
+    <PackageReference Include="Thuria.Calot.TestUtilities" Version="0.0.4-beta" />
+    <PackageReference Include="Thuria.Zitidar.Akka" Version="0.0.10-beta" />
+    <PackageReference Include="Thuria.Zitidar.Core" Version="0.0.10-beta" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Thuria.Helium.Akka\Thuria.Helium.Akka.csproj" />
+  </ItemGroup>
+
+</Project>
