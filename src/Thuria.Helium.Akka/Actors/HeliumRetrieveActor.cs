@@ -22,6 +22,8 @@ namespace Thuria.Helium.Akka.Actors
       : base(HeliumAction.Retrieve)
     {
       _constructSelectSqlQueryActor = Context.ActorOf(Context.DI().Props<HeliumConstructSelectSqlQueryActor>(), $"HeliumConstructSelectSqlQuery_{HeliumAction.Retrieve}");
+
+      Receive<HeliumConstructSqlQueryResultMessage>(HandleSqlQueryResult, message => message.HeliumAction == HeliumAction.Retrieve);
     }
 
     /// <inheritdoc />
@@ -29,6 +31,11 @@ namespace Thuria.Helium.Akka.Actors
     {
       var sqlQueryMessage = new HeliumConstructSqlQueryMessage(Guid.NewGuid(), HeliumAction, actionMessage.DataModel);
       _constructSelectSqlQueryActor.Tell(sqlQueryMessage);
+    }
+
+    private void HandleSqlQueryResult(HeliumConstructSqlQueryResultMessage obj)
+    {
+      throw new NotImplementedException();
     }
   }
 }

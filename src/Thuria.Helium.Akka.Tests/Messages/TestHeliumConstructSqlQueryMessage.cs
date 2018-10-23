@@ -7,10 +7,10 @@ using Thuria.Helium.Akka.Core;
 using Thuria.Calot.TestUtilities;
 using Thuria.Helium.Akka.Messages;
 
-namespace Thuria.Helium.Akka.Tests
+namespace Thuria.Helium.Akka.Tests.Messages
 {
   [TestFixture]
-  public class TestHeliumConstructSqlQueryResultMessage
+  public class TestHeliumConstructSqlQueryMessage
   {
     [Test]
     public void Constructor()
@@ -18,21 +18,30 @@ namespace Thuria.Helium.Akka.Tests
       //---------------Set up test pack-------------------
       //---------------Assert Precondition----------------
       //---------------Execute Test ----------------------
-      var actionMessage = new HeliumConstructSqlQueryResultMessage(Guid.NewGuid(), HeliumAction.None, new object(), String.Empty);
+      var actionMessage = new HeliumConstructSqlQueryMessage(Guid.NewGuid(), HeliumAction.None, new object());
       //---------------Test Result -----------------------
       actionMessage.Should().NotBeNull();
+    }
+
+    [TestCase("messageId")]
+    public void Constructor_GivenNullParameter_ShouldThrowException(string parameterName)
+    {
+      //---------------Set up test pack-------------------
+      //---------------Assert Precondition----------------
+      //---------------Execute Test ----------------------
+      ConstructorTestHelper.ValidateArgumentNullExceptionIfParameterIsNull<HeliumConstructSqlQueryMessage>(parameterName);
+      //---------------Test Result -----------------------
     }
 
     [TestCase("messageId", "Id")]
     [TestCase("heliumAction", "HeliumAction")]
     [TestCase("dataModel", "DataModel")]
-    [TestCase("sqlQuery", "SqlQuery")]
     public void Constructor_GivenParameterValue_ShouldSetPropertyValue(string parameterName, string propertyName)
     {
       //---------------Set up test pack-------------------
       //---------------Assert Precondition----------------
       //---------------Execute Test ----------------------
-      ConstructorTestHelper.ValidatePropertySetWithParameter<HeliumConstructSqlQueryResultMessage>(parameterName, propertyName);
+      ConstructorTestHelper.ValidatePropertySetWithParameter<HeliumConstructSqlQueryMessage>(parameterName, propertyName);
       //---------------Test Result -----------------------
     }
   }

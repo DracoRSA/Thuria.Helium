@@ -5,10 +5,10 @@ using Thuria.Helium.Akka.Core;
 using Thuria.Calot.TestUtilities;
 using Thuria.Helium.Akka.Messages;
 
-namespace Thuria.Helium.Akka.Tests
+namespace Thuria.Helium.Akka.Tests.Messages
 {
   [TestFixture]
-  public class TestHeliumActionMessage
+  public class TestHeliumActionResultMessage
   {
     [Test]
     public void Constructor()
@@ -16,19 +16,18 @@ namespace Thuria.Helium.Akka.Tests
       //---------------Set up test pack-------------------
       //---------------Assert Precondition----------------
       //---------------Execute Test ----------------------
-      var actionMessage = new HeliumActionMessage(HeliumAction.None, new object());
+      var actionMessage = new HeliumActionResultMessage(HeliumActionResult.Unknown);
       //---------------Test Result -----------------------
       actionMessage.Should().NotBeNull();
     }
 
-    [TestCase("heliumAction", "HeliumAction")]
-    [TestCase("dataModel", "DataModel")]
+    [TestCase("heliumActionResult", "HeliumActionResult")]
     public void Constructor_GivenParameterValue_ShouldSetPropertyValue(string parameterName, string propertyName)
     {
       //---------------Set up test pack-------------------
       //---------------Assert Precondition----------------
       //---------------Execute Test ----------------------
-      ConstructorTestHelper.ValidatePropertySetWithParameter<HeliumActionMessage>(parameterName, propertyName);
+      ConstructorTestHelper.ValidatePropertySetWithParameter<HeliumActionResultMessage>(parameterName, propertyName);
       //---------------Test Result -----------------------
     }
   }
