@@ -14,6 +14,7 @@ namespace Thuria.Helium.Akka.Actors
   public class HeliumRetrieveActor : HeliumActionActorBase
   {
     private readonly IActorRef _constructSelectSqlQueryActor;
+    private readonly IActorRef _executeSqlQueryActor;
 
     /// <summary>
     /// Helium Retrieve Actor Constructor
@@ -22,6 +23,7 @@ namespace Thuria.Helium.Akka.Actors
       : base(HeliumAction.Retrieve)
     {
       _constructSelectSqlQueryActor = Context.ActorOf(Context.DI().Props<HeliumConstructSelectSqlQueryActor>(), $"HeliumConstructSelectSqlQuery_{HeliumAction.Retrieve}");
+      _executeSqlQueryActor         = Context.ActorOf(Context.DI().Props<HeliumExecuteSqlQueryActor>(), $"HeliumExecuteSqlQuery_{HeliumAction.Retrieve}");
 
       Receive<HeliumConstructSqlQueryResultMessage>(HandleSqlQueryResult, message => message.HeliumAction == HeliumAction.Retrieve);
     }
@@ -33,9 +35,10 @@ namespace Thuria.Helium.Akka.Actors
       _constructSelectSqlQueryActor.Tell(sqlQueryMessage);
     }
 
-    private void HandleSqlQueryResult(HeliumConstructSqlQueryResultMessage obj)
+    private void HandleSqlQueryResult(HeliumConstructSqlQueryResultMessage sqlQueryResultMessage)
     {
-      throw new NotImplementedException();
+      var executeSqlQueryMessage = new HeliumExecuteSqlQueryMessage(Guid.NewGuid(), HeliumAction.Retrieve, sqlQueryResultMessage.SqlQuery);
+      _executeSqlQueryActor.Tell(executeSqlQueryMessage);
     }
   }
 }
