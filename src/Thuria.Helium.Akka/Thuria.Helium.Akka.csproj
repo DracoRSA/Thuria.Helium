@@ -12,14 +12,16 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Thuria.Thark.DataModel" Version="0.0.2" />
-    <PackageReference Include="Thuria.Thark.StatementBuilder" Version="0.0.2" />
-    <PackageReference Include="Thuria.Zitidar.Akka" Version="0.0.11-beta" />
-    <PackageReference Include="Thuria.Zitidar.Core" Version="0.0.11-beta" />
+    <Compile Remove="Models\**" />
+    <EmbeddedResource Remove="Models\**" />
+    <None Remove="Models\**" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Models\" />
+    <PackageReference Include="Thuria.Thark.DataModel" Version="0.0.2" />
+    <PackageReference Include="Thuria.Thark.StatementBuilder" Version="0.0.2" />
+    <PackageReference Include="Thuria.Zitidar.Akka" Version="0.0.11-beta" />
+    <PackageReference Include="Thuria.Zitidar.Core" Version="0.0.13" />
   </ItemGroup>
 
   <ItemGroup>

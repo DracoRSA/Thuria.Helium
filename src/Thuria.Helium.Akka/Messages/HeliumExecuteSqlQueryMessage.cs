@@ -14,21 +14,29 @@ namespace Thuria.Helium.Akka.Messages
     /// Helium Execute SQL Query Message Constructor
     /// </summary>
     /// <param name="messageId">Message ID</param>
+    /// <param name="dbContextName">Database Context Name</param>
     /// <param name="heliumAction">Helium Action</param>
     /// <param name="sqlQuery">SQL Query to be executed</param>
-    public HeliumExecuteSqlQueryMessage(Guid messageId, HeliumAction heliumAction, string sqlQuery)
+    public HeliumExecuteSqlQueryMessage(Guid messageId, string dbContextName, HeliumAction heliumAction, string sqlQuery)
     {
+      if (string.IsNullOrWhiteSpace(dbContextName)) { throw new ArgumentNullException(nameof(dbContextName)); }
       if (string.IsNullOrWhiteSpace(sqlQuery)) { throw new ArgumentNullException(nameof(sqlQuery)); }
 
-      Id           = messageId;
-      HeliumAction = heliumAction;
-      SqlQuery     = sqlQuery;
+      Id                  = messageId;
+      DatabaseContextName = dbContextName;
+      HeliumAction        = heliumAction;
+      SqlQuery            = sqlQuery;
     }
 
     /// <summary>
     /// Message ID
     /// </summary>
     public Guid Id { get; }
+
+    /// <summary>
+    /// Database Context Name
+    /// </summary>
+    public string DatabaseContextName { get; }
 
     /// <summary>
     /// Helium Action
