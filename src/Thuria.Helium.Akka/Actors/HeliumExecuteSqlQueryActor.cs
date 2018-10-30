@@ -1,10 +1,13 @@
 ﻿using System;
+using System.Collections.Generic;
 
 using Akka.Actor;
 using Akka.DI.Core;
 
 using Thuria.Helium.Akka.Core;
+using Thuria.Thark.Core.Statement;
 using Thuria.Helium.Akka.Messages;
+using Thuria.Thark.Core.DataAccess;
 
 namespace Thuria.Helium.Akka.Actors
 {
@@ -13,13 +16,15 @@ namespace Thuria.Helium.Akka.Actors
   /// </summary>
   public class HeliumExecuteSqlQueryActor : ReceiveActor
   {
+    private readonly IDatabaseBuilder _databaseBuilder;
     private readonly IActorRef _connectionStringActor;
 
     /// <summary>
     /// Helium Execute SQL Query Actor constructor
     /// </summary>
-    public HeliumExecuteSqlQueryActor()
+    public HeliumExecuteSqlQueryActor(IDatabaseBuilder databaseBuilder)
     {
+      _databaseBuilder       = databaseBuilder ?? throw new ArgumentNullException(nameof(databaseBuilder));
       _connectionStringActor = Context.ActorOf(Context.DI().Props<HeliumFileConnectionStringActor>());
 
       Receive<HeliumExecuteSqlQueryMessage>(message => HandleExecuteSqlQuery(message));
@@ -34,7 +39,7 @@ namespace Thuria.Helium.Akka.Actors
 
     private void HandleConnectionStringResult(HeliumGetConnectionStringResultMessage resultMessage)
     {
-      var sqlQueryMessage = (HeliumExecuteSqlQueryMessage) resultMessage.OriginalMessage;
+      var sqlQueryMessage = (HeliumExecuteSqlQueryMessage)resultMessage.OriginalMessage;
 
       try
       { 
@@ -45,27 +50,32 @@ namespace Thuria.Helium.Akka.Actors
             break;
 
           default:
-            throw new Exception($"Helium Action [{sqlQueryMessage.HeliumAction} not currently supported]");
+            throw new Exception($"Helium Action [{sqlQueryMessage} not currently supported]");
         }
       }
       catch (Exception runtimeException)
       {
-        var queryResultMessage = new HeliumExecuteSqlQueryResultMessage(sqlQueryMessage.Id, sqlQueryMessage.HeliumAction, HeliumActionResult.Error, errorDetail: runtimeException);
-        resultMessage.OriginalSender.Tell(queryResultMessage);
+        SendActorResultMessage(sqlQueryMessage.HeliumAction, HeliumActionResult.Error, sqlQueryMessage, errorDetail: runtimeException);
       }
     }
 
-    private void ExecuteSelectSqlQuery(string connectionString, HeliumExecuteSqlQueryMessage sqlQueryMessage)
+    private void ExecuteSelectSqlQuery(string connectionString, HeliumExecuteSqlQueryMessage executeSqlQueryMessage)
     {
-//      using (var databaseContext = this.databaseBuilder.WithDatabaseProviderType(DatabaseProviderType.SqlServer)
-//        .WithConnectionString(connectionString)
-//        .BuildReadonly())
-//      {
-//        var resultData = databaseContext.Select<object>(this.sqlQuery);
-//
-//        var resultMessage = new ExecuteSqlQueryResultMessage(this.originalMessage.ActorMessageId, ActionResult.Success, resultData);
-//        this.originalSender.Tell(resultMessage);
-//      }
+      using (var databaseContext = _databaseBuilder.WithDatabaseProviderType(DatabaseProviderType.SqlServer)
+                                                   .WithConnectionString(connectionString)
+                                                   .BuildReadonly())
+      {
+        var resultData = databaseContext.Select<object>(executeSqlQueryMessage.SqlQuery);
+        SendActorResultMessage(HeliumAction.Retrieve, HeliumActionResult.Success, executeSqlQueryMessage, resultData);
+      }
+    }
+
+    private void SendActorResultMessage(HeliumAction heliumAction, HeliumActionResult heliumActionResult,
+                                        HeliumExecuteSqlQueryMessage executeSqlQueryMessage, IEnumerable<object> resultData = null, object errorDetail = null)
+    {
+      var resultMessage  = new HeliumExecuteSqlQueryResultMessage(heliumAction, heliumActionResult, executeSqlQueryMessage.OriginalSender, 
+                                                                  executeSqlQueryMessage.OriginalMessage, resultData, errorDetail);
+      executeSqlQueryMessage.OriginalSender.Tell(resultMessage);
     }
   }
 }

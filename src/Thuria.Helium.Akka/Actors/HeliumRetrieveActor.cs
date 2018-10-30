@@ -1,6 +1,4 @@
-﻿using System;
-
-using Akka.Actor;
+﻿using Akka.Actor;
 using Akka.DI.Core;
 
 using Thuria.Helium.Akka.Core;
@@ -31,13 +29,15 @@ namespace Thuria.Helium.Akka.Actors
     /// <inheritdoc />
     protected override void StartHeliumActionProcessing(HeliumActionMessage actionMessage)
     {
-      var sqlQueryMessage = new HeliumConstructSqlQueryMessage(Guid.NewGuid(), HeliumAction, actionMessage.DataModel);
+      var sqlQueryMessage = new HeliumConstructSqlQueryMessage(actionMessage.HeliumAction, Sender, actionMessage);
       _constructSelectSqlQueryActor.Tell(sqlQueryMessage);
     }
 
     private void HandleSqlQueryResult(HeliumConstructSqlQueryResultMessage sqlQueryResultMessage)
     {
-      var executeSqlQueryMessage = new HeliumExecuteSqlQueryMessage(Guid.NewGuid(), HeliumAction.Retrieve, sqlQueryResultMessage.SqlQuery);
+      var originalMessage        = (HeliumActionMessage)sqlQueryResultMessage.OriginalMessage;
+      var executeSqlQueryMessage = new HeliumExecuteSqlQueryMessage(originalMessage.DatabaseContextName, HeliumAction.Retrieve, sqlQueryResultMessage.SqlQuery, 
+                                                                    sqlQueryResultMessage.OriginalSender, sqlQueryResultMessage.OriginalMessage);
       _executeSqlQueryActor.Tell(executeSqlQueryMessage);
     }
   }

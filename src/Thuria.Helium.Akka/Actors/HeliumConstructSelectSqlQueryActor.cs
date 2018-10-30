@@ -2,6 +2,7 @@
 
 using Thuria.Thark.DataModel;
 using Thuria.Helium.Akka.Core;
+using Thuria.Zitidar.Extensions;
 using Thuria.Helium.Akka.Messages;
 using Thuria.Thark.StatementBuilder.Models;
 using Thuria.Thark.StatementBuilder.Builders;
@@ -23,10 +24,12 @@ namespace Thuria.Helium.Akka.Actors
 
     private void HandleConstructSqlQueryMessage(HeliumConstructSqlQueryMessage requestMessage)
     {
-      ActorLogger.Log(LogLevel.InfoLevel, $"Constructing {requestMessage.HeliumAction} SQL Query for {requestMessage.DataModel.GetType().Name}");
+      var dataModel = requestMessage.OriginalMessage.GetPropertyValue("DataModel");
 
-      var sqlQuery      = ConstructSelectStatement(requestMessage.DataModel);
-      var resultMessage = new HeliumConstructSqlQueryResultMessage(requestMessage.Id, requestMessage.HeliumAction, requestMessage.DataModel, sqlQuery);
+      ActorLogger.Log(LogLevel.InfoLevel, $"Constructing {requestMessage.HeliumAction} SQL Query for {dataModel.GetType().Name}");
+
+      var sqlQuery      = ConstructSelectStatement(dataModel);
+      var resultMessage = new HeliumConstructSqlQueryResultMessage(requestMessage.HeliumAction, sqlQuery, requestMessage.OriginalSender, requestMessage.OriginalMessage);
 
       Sender.Tell(resultMessage, null);
     }
@@ -35,7 +38,7 @@ namespace Thuria.Helium.Akka.Actors
     {
       var dataModelTable   = dataModel.GetThuriaDataModelTableName();
       var dataModelColumns = dataModel.GetThuriaDataModelColumns(TharkAction.Retrieve);
-      var whereCondition   = this.GetWhereConditionsForDataModel(TharkAction.Retrieve, dataModel);
+      var whereCondition   = GetWhereConditionsForDataModel(TharkAction.Retrieve, dataModel);
 
       var selectStatementBuilder = SelectStatementBuilder.Create().WithTable(dataModelTable);
 

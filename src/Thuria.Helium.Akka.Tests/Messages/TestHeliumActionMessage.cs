@@ -23,6 +23,7 @@ namespace Thuria.Helium.Akka.Tests.Messages
 
     [TestCase("heliumAction", "HeliumAction")]
     [TestCase("dataModel", "DataModel")]
+    [TestCase("dbContextName", "DatabaseContextName")]
     public void Constructor_GivenParameterValue_ShouldSetPropertyValue(string parameterName, string propertyName)
     {
       //---------------Set up test pack-------------------

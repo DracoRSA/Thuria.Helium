@@ -1,6 +1,5 @@
 ﻿using System;
-
-using Thuria.Zitidar.Akka;
+using Akka.Actor;
 using Thuria.Helium.Akka.Core;
 
 namespace Thuria.Helium.Akka.Messages
@@ -8,30 +7,26 @@ namespace Thuria.Helium.Akka.Messages
   /// <summary>
   /// Helium Execute SQL Query Message
   /// </summary>
-  public class HeliumExecuteSqlQueryMessage : IThuriaActorMessage
+  public class HeliumExecuteSqlQueryMessage : HeliumStatefulMessage
   {
     /// <summary>
     /// Helium Execute SQL Query Message Constructor
     /// </summary>
-    /// <param name="messageId">Message ID</param>
     /// <param name="dbContextName">Database Context Name</param>
     /// <param name="heliumAction">Helium Action</param>
     /// <param name="sqlQuery">SQL Query to be executed</param>
-    public HeliumExecuteSqlQueryMessage(Guid messageId, string dbContextName, HeliumAction heliumAction, string sqlQuery)
+    /// <param name="originalSender"></param>
+    /// <param name="originalMessage"></param>
+    public HeliumExecuteSqlQueryMessage(string dbContextName, HeliumAction heliumAction, string sqlQuery, IActorRef originalSender, object originalMessage)
+      : base(originalSender, originalMessage)
     {
       if (string.IsNullOrWhiteSpace(dbContextName)) { throw new ArgumentNullException(nameof(dbContextName)); }
       if (string.IsNullOrWhiteSpace(sqlQuery)) { throw new ArgumentNullException(nameof(sqlQuery)); }
 
-      Id                  = messageId;
       DatabaseContextName = dbContextName;
       HeliumAction        = heliumAction;
       SqlQuery            = sqlQuery;
     }
-
-    /// <summary>
-    /// Message ID
-    /// </summary>
-    public Guid Id { get; }
 
     /// <summary>
     /// Database Context Name

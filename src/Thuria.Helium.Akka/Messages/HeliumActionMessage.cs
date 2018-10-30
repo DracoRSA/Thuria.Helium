@@ -12,10 +12,12 @@ namespace Thuria.Helium.Akka.Messages
     /// </summary>
     /// <param name="heliumAction">Helium Action to perform</param>
     /// <param name="dataModel">Action Input Data Model</param>
-    public HeliumActionMessage(HeliumAction heliumAction, object dataModel)
+    /// <param name="dbContextName">Database Context Name (Default = Helium)</param>
+    public HeliumActionMessage(HeliumAction heliumAction, object dataModel, string dbContextName = "Helium")
     {
-      HeliumAction = heliumAction;
-      DataModel    = dataModel;
+      HeliumAction        = heliumAction;
+      DataModel           = dataModel;
+      DatabaseContextName = dbContextName;
     }
 
     /// <summary>
@@ -27,5 +29,10 @@ namespace Thuria.Helium.Akka.Messages
     /// Input Data Model
     /// </summary>
     public object DataModel { get; }
+
+    /// <summary>
+    /// Database Context Name
+    /// </summary>
+    public string DatabaseContextName { get; }
   }
 }

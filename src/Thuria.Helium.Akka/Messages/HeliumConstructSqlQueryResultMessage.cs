@@ -1,6 +1,4 @@
-﻿using System;
-
-using Thuria.Zitidar.Akka;
+﻿using Akka.Actor;
 using Thuria.Helium.Akka.Core;
 
 namespace Thuria.Helium.Akka.Messages
@@ -8,37 +6,26 @@ namespace Thuria.Helium.Akka.Messages
   /// <summary>
   /// Helium Construct SQL Query Result Message
   /// </summary>
-  public class HeliumConstructSqlQueryResultMessage : IThuriaActorMessage
+  public class HeliumConstructSqlQueryResultMessage : HeliumStatefulMessage
   {
     /// <summary>
     /// Helium Construct SQL Query Result Message
     /// </summary>
-    /// <param name="messageId">Unique Message ID</param>
     /// <param name="heliumAction">Helium Action</param>
-    /// <param name="dataModel">Input data Model</param>
     /// <param name="sqlQuery">Created SQL Query</param>
-    public HeliumConstructSqlQueryResultMessage(Guid messageId, HeliumAction heliumAction, object dataModel, string sqlQuery)
+    /// <param name="originalSender"></param>
+    /// <param name="originalMessage"></param>
+    public HeliumConstructSqlQueryResultMessage(HeliumAction heliumAction, string sqlQuery, IActorRef originalSender, object originalMessage)
+      : base(originalSender, originalMessage)
     {
-      Id           = messageId;
       HeliumAction = heliumAction;
-      DataModel    = dataModel;
       SqlQuery     = sqlQuery;
     }
-
-    /// <summary>
-    /// Actor Message ID
-    /// </summary>
-    public Guid Id { get; }
 
     /// <summary>
     /// Helium Action
     /// </summary>
     public HeliumAction HeliumAction { get; }
-
-    /// <summary>
-    /// Input Data Model
-    /// </summary>
-    public object DataModel { get; }
 
     /// <summary>
     /// SQL Query
