@@ -1,5 +1,6 @@
-﻿using System;
+﻿using Akka.Actor;
 
+using NSubstitute;
 using NUnit.Framework;
 using FluentAssertions;
 
@@ -15,9 +16,10 @@ namespace Thuria.Helium.Akka.Tests.Messages
     public void Constructor()
     {
       //---------------Set up test pack-------------------
+      var originalSender = Substitute.For<IActorRef>();
       //---------------Assert Precondition----------------
       //---------------Execute Test ----------------------
-      var executeSqlQueryMessage = new HeliumExecuteSqlQueryMessage(Guid.NewGuid(), "dbContext", HeliumAction.Retrieve, "SELECT * FROM [Test]");
+      var executeSqlQueryMessage = new HeliumExecuteSqlQueryMessage("dbContext", HeliumAction.Retrieve, "SELECT * FROM [Test]", originalSender, null);
       //---------------Test Result -----------------------
       executeSqlQueryMessage.Should().NotBeNull();
     }

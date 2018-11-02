@@ -1,5 +1,6 @@
-﻿using System;
+﻿using Akka.Actor;
 
+using NSubstitute;
 using NUnit.Framework;
 using FluentAssertions;
 
@@ -16,14 +17,15 @@ namespace Thuria.Helium.Akka.Tests.Messages
     public void Constructor()
     {
       //---------------Set up test pack-------------------
+      var originalSender = Substitute.For<IActorRef>();
       //---------------Assert Precondition----------------
       //---------------Execute Test ----------------------
-      var actionMessage = new HeliumConstructSqlQueryMessage(Guid.NewGuid(), HeliumAction.None, new object());
+      var actionMessage = new HeliumConstructSqlQueryMessage(HeliumAction.None, originalSender, null);
       //---------------Test Result -----------------------
       actionMessage.Should().NotBeNull();
     }
 
-    [TestCase("messageId")]
+    [TestCase("originalSender")]
     public void Constructor_GivenNullParameter_ShouldThrowException(string parameterName)
     {
       //---------------Set up test pack-------------------
@@ -33,9 +35,9 @@ namespace Thuria.Helium.Akka.Tests.Messages
       //---------------Test Result -----------------------
     }
 
-    [TestCase("messageId", "Id")]
     [TestCase("heliumAction", "HeliumAction")]
-    [TestCase("dataModel", "DataModel")]
+    [TestCase("originalSender", "OriginalSender")]
+    [TestCase("originalMessage", "OriginalMessage")]
     public void Constructor_GivenParameterValue_ShouldSetPropertyValue(string parameterName, string propertyName)
     {
       //---------------Set up test pack-------------------

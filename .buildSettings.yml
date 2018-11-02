@@ -1,23 +1,8 @@
-VERSION: 0.0.3
+VERSION: 0.0.1
 CONFIGURATION: Debug
 NUGETPACKAGES:
-  - Core:
-    Name: Thark.Core
-    Version: 0.0.3
-    Location: src/Thuria.Thark.Core
-    IsBeta: true
-  - StatementBuilder:
-    Name: Thark.StatementBuilder
-    Version: 0.0.3
-    Location: src/Thuria.Thark.StatementBuilder
-    IsBeta: true
-  - DataAccess:
-    Name: Thark.DataAccess
-    Version: 0.0.3
-    Location: src/Thuria.Thark.DataAccess
-    IsBeta: true
-  - DataModel:
-    Name: Thark.DataModel
-    Version: 0.0.3
-    Location: src/Thuria.Thark.DataModel
+  - HeliumAkka:
+    Name: Helium.Akka
+    Version: 0.0.1
+    Location: src/Thuria.Helium.Akka
     IsBeta: true

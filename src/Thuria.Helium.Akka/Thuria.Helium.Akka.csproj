@@ -5,6 +5,13 @@
     <Authors>Johan Dercksen</Authors>
     <Company>Draco</Company>
     <Product>Thuria</Product>
+    <Version>0.0.1</Version>
+    <PackageProjectUrl>https://github.com/DracoRSA/Thuria.Helium</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/DracoRSA/Thuria.Helium</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>Thuria Helium DataAccess</PackageTags>
+    <PackageLicenseUrl>https://github.com/DracoRSA/Thuria.Helium/blob/master/LICENSE</PackageLicenseUrl>
+    <Description>Thuria Helium is a ORM framework utilizing the Akka.Net actor framework. It is built on the features of the Thuria Thark data access framework. Various databases are supported namely: SQL Server, Postgres, etc</Description>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
