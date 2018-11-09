@@ -40,7 +40,7 @@ namespace Thuria.Helium.Akka.Actors
       var dataModelColumns = dataModel.GetThuriaDataModelColumns(TharkAction.Retrieve);
       var whereCondition   = GetWhereConditionsForDataModel(TharkAction.Retrieve, dataModel);
 
-      var selectStatementBuilder = SelectStatementBuilder.Create().WithTable(dataModelTable);
+      var selectStatementBuilder = SelectStatementBuilder.Create.WithTable(dataModelTable);
 
       foreach (var currentColumn in dataModelColumns)
       {

@@ -2,20 +2,25 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>0.0.1-beta</Version>
+    <Version>0.0.1</Version>
     <Authors>Johan Dercksen</Authors>
     <Company>Draco</Company>
     <Product>Thuria</Product>
-    <Description>Core interfaces and enumeration definitions of the Helium Akka framework</Description>
+    <Description>Nancy Module for the Helium Akka.Net framework. This package contains the Nancy Module implementation to perform all the required Helium Actions.</Description>
     <PackageLicenseUrl>https://github.com/DracoRSA/Thuria.Helium/blob/master/LICENSE</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/DracoRSA/Thuria.Helium</PackageProjectUrl>
     <RepositoryUrl>https://github.com/DracoRSA/Thuria.Helium</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
-    <PackageTags>Thuria Helium Akka.net</PackageTags>
+    <PackageTags>Thuria Helium Akka.Net Nancy</PackageTags>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>D:\projects\Thuria.Helium\src\Thuria.Helium.Akka.Core\Thuria.Helium.Akka.Core.xml</DocumentationFile>
+    <DocumentationFile>D:\projects\Thuria.Helium\src\Thuria.Helium.Akka.Nancy\Thuria.Helium.Akka.Nancy.xml</DocumentationFile>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Nancy" Version="2.0.0-clinteastwood" />
+    <PackageReference Include="Thuria.Zitidar.Core" Version="0.0.17-beta" />
+  </ItemGroup>
 
 </Project>

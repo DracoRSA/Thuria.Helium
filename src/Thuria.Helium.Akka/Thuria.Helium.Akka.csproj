@@ -1,15 +1,15 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <Authors>Johan Dercksen</Authors>
     <Company>Draco</Company>
     <Product>Thuria</Product>
-    <Version>0.0.1</Version>
+    <Version>0.0.1-beta</Version>
     <PackageProjectUrl>https://github.com/DracoRSA/Thuria.Helium</PackageProjectUrl>
     <RepositoryUrl>https://github.com/DracoRSA/Thuria.Helium</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
-    <PackageTags>Thuria Helium DataAccess</PackageTags>
+    <PackageTags>Thuria Helium Akka.net</PackageTags>
     <PackageLicenseUrl>https://github.com/DracoRSA/Thuria.Helium/blob/master/LICENSE</PackageLicenseUrl>
     <Description>Thuria Helium is a ORM framework utilizing the Akka.Net actor framework. It is built on the features of the Thuria Thark data access framework. Various databases are supported namely: SQL Server, Postgres, etc</Description>
   </PropertyGroup>
@@ -25,10 +25,22 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Thuria.Thark.DataModel" Version="0.0.2" />
-    <PackageReference Include="Thuria.Thark.StatementBuilder" Version="0.0.2" />
-    <PackageReference Include="Thuria.Zitidar.Akka" Version="0.0.11-beta" />
-    <PackageReference Include="Thuria.Zitidar.Core" Version="0.0.13" />
+    <None Remove="akka.config" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="akka.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Akka.Logger.NLog" Version="1.3.3" />
+    <PackageReference Include="Akka.Serialization.Hyperion" Version="1.3.10-beta" />
+    <PackageReference Include="Thuria.Thark.DataModel" Version="0.0.5-beta" />
+    <PackageReference Include="Thuria.Thark.StatementBuilder" Version="0.0.5-beta" />
+    <PackageReference Include="Thuria.Zitidar.Akka" Version="0.0.14-beta" />
+    <PackageReference Include="Thuria.Zitidar.Core" Version="0.0.17-beta" />
   </ItemGroup>
 
   <ItemGroup>

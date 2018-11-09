@@ -19,7 +19,7 @@ namespace Thuria.Helium.Akka.Actors
     protected string GetWhereConditionsForDataModel(TharkAction tharkAction, object dataModel)
     {
       var conditionCount      = 0;
-      var builder             = ConditionBuilder.Create();
+      var builder             = ConditionBuilder.Create;
       var tableName           = dataModel.GetThuriaDataModelTableName();
       var dataModelConditions = dataModel.GetThuriaDataModelConditions(tharkAction);
 

@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Thuria.Helium.Akka.Core</name>
+    </assembly>
+    <members>
+        <member name="T:Thuria.Helium.Akka.Core.HeliumAction">
+            <summary>
+            Helium Action enumeration
+            </summary>
+        </member>
+        <member name="F:Thuria.Helium.Akka.Core.HeliumAction.None">
+            <summary>
+            Perform no Action
+            </summary>
+        </member>
+        <member name="F:Thuria.Helium.Akka.Core.HeliumAction.Retrieve">
+            <summary>
+            Perform a retrieve
+            </summary>
+        </member>
+        <member name="T:Thuria.Helium.Akka.Core.HeliumActionResult">
+            <summary>
+            Helium Action Result enumeration
+            </summary>
+        </member>
+        <member name="F:Thuria.Helium.Akka.Core.HeliumActionResult.Unknown">
+            <summary>
+            Result is Unknown
+            </summary>
+        </member>
+        <member name="F:Thuria.Helium.Akka.Core.HeliumActionResult.Success">
+            <summary>
+            Successful Action
+            </summary>
+        </member>
+        <member name="F:Thuria.Helium.Akka.Core.HeliumActionResult.Warning">
+            <summary>
+            Action resulted in warnings issued
+            </summary>
+        </member>
+        <member name="F:Thuria.Helium.Akka.Core.HeliumActionResult.Error">
+            <summary>
+            Action resulted in errors
+            </summary>
+        </member>
+    </members>
+</doc>

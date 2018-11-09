@@ -6,16 +6,22 @@
     <Authors>Johan Dercksen</Authors>
     <Company>Draco</Company>
     <Product>Thuria</Product>
-    <Description>Core interfaces and enumeration definitions of the Helium Akka framework</Description>
+    <Description>Structuremap container registrations of the Helium container requirements</Description>
     <PackageLicenseUrl>https://github.com/DracoRSA/Thuria.Helium/blob/master/LICENSE</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/DracoRSA/Thuria.Helium</PackageProjectUrl>
     <RepositoryUrl>https://github.com/DracoRSA/Thuria.Helium</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
-    <PackageTags>Thuria Helium Akka.net</PackageTags>
+    <PackageTags>Thuria Helium Akka.net Structuremap</PackageTags>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>D:\projects\Thuria.Helium\src\Thuria.Helium.Akka.Core\Thuria.Helium.Akka.Core.xml</DocumentationFile>
+    <DocumentationFile>D:\projects\Thuria.Helium\src\Thuria.Helium.Akka.Structuremap\Thuria.Helium.Akka.Structuremap.xml</DocumentationFile>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="StructureMap" Version="4.7.0" />
+    <PackageReference Include="Thuria.Thark.DataAccess" Version="0.0.6-beta" />
+    <PackageReference Include="Thuria.Zitidar.Core" Version="0.0.17-beta" />
+  </ItemGroup>
 
 </Project>
