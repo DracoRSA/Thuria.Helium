@@ -17,6 +17,12 @@ namespace Thuria.Helium.Akka.Nancy
     private readonly IResponseNegotiator _responseNegotiator;
     private readonly IThuriaLogger _thuriaLogger;
 
+    /// <summary>
+    /// Helium Retrieve Module constructor
+    /// </summary>
+    /// <param name="thuriaSerializer">Thuria Serializer</param>
+    /// <param name="responseNegotiator">Response Negotiator</param>
+    /// <param name="thuriaLogger">Thuria Logger</param>
     public HeliumRetrieveModule(IThuriaSerializer thuriaSerializer, IResponseNegotiator responseNegotiator, IThuriaLogger thuriaLogger) 
       : base("helium")
     {
@@ -29,7 +35,9 @@ namespace Thuria.Helium.Akka.Nancy
 
     private async Task<Response> ProcessRequest()
     {
-      throw new NotImplementedException();
+      _thuriaLogger.LogMessage(LogSeverity.Info, "Received Helium Retrieve Request");
+
+      return new Response().WithStatusCode(HttpStatusCode.OK);
     }
   }
 }
