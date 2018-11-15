@@ -1,4 +1,4 @@
-﻿namespace Thuria.Helium.Akka.Core
+﻿namespace Thuria.Helium.Core
 {
   /// <summary>
   /// Helium Action enumeration

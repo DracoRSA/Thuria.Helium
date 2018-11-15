@@ -1,0 +1,78 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Thuria.Helium.Core</name>
+    </assembly>
+    <members>
+        <member name="T:Thuria.Helium.Core.HeliumAction">
+            <summary>
+            Helium Action enumeration
+            </summary>
+        </member>
+        <member name="F:Thuria.Helium.Core.HeliumAction.None">
+            <summary>
+            Perform no Action
+            </summary>
+        </member>
+        <member name="F:Thuria.Helium.Core.HeliumAction.Retrieve">
+            <summary>
+            Perform a retrieve
+            </summary>
+        </member>
+        <member name="T:Thuria.Helium.Core.HeliumActionResult">
+            <summary>
+            Helium Action Result enumeration
+            </summary>
+        </member>
+        <member name="F:Thuria.Helium.Core.HeliumActionResult.Unknown">
+            <summary>
+            Result is Unknown
+            </summary>
+        </member>
+        <member name="F:Thuria.Helium.Core.HeliumActionResult.Success">
+            <summary>
+            Successful Action
+            </summary>
+        </member>
+        <member name="F:Thuria.Helium.Core.HeliumActionResult.Warning">
+            <summary>
+            Action resulted in warnings issued
+            </summary>
+        </member>
+        <member name="F:Thuria.Helium.Core.HeliumActionResult.Error">
+            <summary>
+            Action resulted in errors
+            </summary>
+        </member>
+        <member name="T:Thuria.Helium.Core.HeliumRequestModel">
+            <summary>
+            Helium Request Model
+            </summary>
+        </member>
+        <member name="P:Thuria.Helium.Core.HeliumRequestModel.Action">
+            <summary>
+            Helium Action
+            </summary>
+        </member>
+        <member name="P:Thuria.Helium.Core.HeliumRequestModel.RequestData">
+            <summary>
+            Request Data
+            </summary>
+        </member>
+        <member name="T:Thuria.Helium.Core.HeliumResponse">
+            <summary>
+            Helium Response
+            </summary>
+        </member>
+        <member name="P:Thuria.Helium.Core.HeliumResponse.ActionResult">
+            <summary>
+            Helium Action Result
+            </summary>
+        </member>
+        <member name="P:Thuria.Helium.Core.HeliumResponse.ResultData">
+            <summary>
+            Result Data
+            </summary>
+        </member>
+    </members>
+</doc>

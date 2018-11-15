@@ -4,6 +4,7 @@ using NSubstitute;
 using NUnit.Framework;
 using FluentAssertions;
 
+using Thuria.Helium.Core;
 using Thuria.Helium.Akka.Core;
 using Thuria.Helium.Akka.Messages;
 

@@ -17,7 +17,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Thuria.Helium.Akka.Structuremap", "Thuria.Helium.Akka.Structuremap\Thuria.Helium.Akka.Structuremap.csproj", "{B9F129F1-226D-46FE-B64F-C03D583FCDB2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Thuria.Helium.Akka.Nancy", "Thuria.Helium.Akka.Nancy\Thuria.Helium.Akka.Nancy.csproj", "{722B8089-BD55-49D6-AC1E-E8B5C10D7D03}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Thuria.Helium.Akka.Nancy", "Thuria.Helium.Akka.Nancy\Thuria.Helium.Akka.Nancy.csproj", "{722B8089-BD55-49D6-AC1E-E8B5C10D7D03}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Thuria.Helium.Core", "Thuria.Helium.Core\Thuria.Helium.Core.csproj", "{68854719-A2D5-40ED-BC9E-7AC9A3C91C8D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{722B8089-BD55-49D6-AC1E-E8B5C10D7D03}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{722B8089-BD55-49D6-AC1E-E8B5C10D7D03}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{722B8089-BD55-49D6-AC1E-E8B5C10D7D03}.Release|Any CPU.Build.0 = Release|Any CPU
+		{68854719-A2D5-40ED-BC9E-7AC9A3C91C8D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{68854719-A2D5-40ED-BC9E-7AC9A3C91C8D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{68854719-A2D5-40ED-BC9E-7AC9A3C91C8D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{68854719-A2D5-40ED-BC9E-7AC9A3C91C8D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

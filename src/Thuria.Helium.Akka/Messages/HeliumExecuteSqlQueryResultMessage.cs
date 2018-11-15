@@ -2,7 +2,7 @@
 
 using Akka.Actor;
 
-using Thuria.Helium.Akka.Core;
+using Thuria.Helium.Core;
 
 namespace Thuria.Helium.Akka.Messages
 {

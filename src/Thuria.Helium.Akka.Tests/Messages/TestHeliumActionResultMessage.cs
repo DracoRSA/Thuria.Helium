@@ -1,9 +1,9 @@
 ﻿using NUnit.Framework;
 using FluentAssertions;
 
-using Thuria.Helium.Akka.Core;
+using Thuria.Helium.Core;
 using Thuria.Calot.TestUtilities;
-using Thuria.Helium.Akka.Messages;
+using Thuria.Helium.Akka.Core.Messages;
 
 namespace Thuria.Helium.Akka.Tests.Messages
 {

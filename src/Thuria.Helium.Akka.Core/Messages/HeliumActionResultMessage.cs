@@ -1,6 +1,6 @@
-﻿using Thuria.Helium.Akka.Core;
+﻿using Thuria.Helium.Core;
 
-namespace Thuria.Helium.Akka.Messages
+namespace Thuria.Helium.Akka.Core.Messages
 {
   /// <summary>
   /// Helium Action Result Message

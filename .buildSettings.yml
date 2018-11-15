@@ -1,6 +1,11 @@
 VERSION: 0.0.1
 CONFIGURATION: Debug
 NUGETPACKAGES:
+  - HeliumCore:
+    Name: Helium.Core
+    Version: 0.0.1
+    Location: src/Thuria.Helium.Core
+    IsBeta: true
   - HeliumAkkaCore:
     Name: Helium.Akka.Core
     Version: 0.0.1

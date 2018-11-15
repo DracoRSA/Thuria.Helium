@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using Akka.Actor;
 using Akka.DI.Core;
 
-using Thuria.Helium.Akka.Core;
+using Thuria.Helium.Core;
 using Thuria.Thark.Core.Statement;
 using Thuria.Helium.Akka.Messages;
 using Thuria.Thark.Core.DataAccess;

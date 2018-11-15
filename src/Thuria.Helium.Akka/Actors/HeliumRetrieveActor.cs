@@ -1,8 +1,9 @@
 ﻿using Akka.Actor;
 using Akka.DI.Core;
 
-using Thuria.Helium.Akka.Core;
+using Thuria.Helium.Core;
 using Thuria.Helium.Akka.Messages;
+using Thuria.Helium.Akka.Core.Messages;
 
 namespace Thuria.Helium.Akka.Actors
 {

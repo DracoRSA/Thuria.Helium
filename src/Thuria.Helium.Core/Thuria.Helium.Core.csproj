@@ -6,20 +6,16 @@
     <Authors>Johan Dercksen</Authors>
     <Company>Draco</Company>
     <Product>Thuria</Product>
-    <Description>Core interfaces and enumeration definitions of the Helium Akka framework</Description>
+    <Description>Core Contracts, Data Models and Enumerations required by the Helium Framework</Description>
     <PackageLicenseUrl>https://github.com/DracoRSA/Thuria.Helium/blob/master/LICENSE</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/DracoRSA/Thuria.Helium</PackageProjectUrl>
     <RepositoryUrl>https://github.com/DracoRSA/Thuria.Helium</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
-    <PackageTags>Thuria Helium Akka.net</PackageTags>
+    <PackageTags>Thuria Helium</PackageTags>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>D:\projects\Thuria.Helium\src\Thuria.Helium.Akka.Core\Thuria.Helium.Akka.Core.xml</DocumentationFile>
+    <DocumentationFile>D:\Draco\Thuria.Helium\src\Thuria.Helium.Core\Thuria.Helium.Core.xml</DocumentationFile>
   </PropertyGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\Thuria.Helium.Core\Thuria.Helium.Core.csproj" />
-  </ItemGroup>
 
 </Project>

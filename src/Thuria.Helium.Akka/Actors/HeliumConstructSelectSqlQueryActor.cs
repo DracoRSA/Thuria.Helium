@@ -1,7 +1,7 @@
 ﻿using Akka.Event;
 
+using Thuria.Helium.Core;
 using Thuria.Thark.DataModel;
-using Thuria.Helium.Akka.Core;
 using Thuria.Zitidar.Extensions;
 using Thuria.Helium.Akka.Messages;
 using Thuria.Thark.StatementBuilder.Models;
