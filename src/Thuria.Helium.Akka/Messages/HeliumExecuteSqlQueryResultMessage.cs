@@ -1,7 +1,4 @@
 ﻿using System.Collections.Generic;
-
-using Akka.Actor;
-
 using Thuria.Helium.Core;
 
 namespace Thuria.Helium.Akka.Messages
@@ -16,13 +13,10 @@ namespace Thuria.Helium.Akka.Messages
     /// </summary>
     /// <param name="heliumAction">Helium Action</param>
     /// <param name="actionResult">Helium Action Result</param>
-    /// <param name="originalSender"></param>
-    /// <param name="originalMessage"></param>
     /// <param name="resultData">Result Data (Optional)</param>
     /// <param name="errorDetail">Error Detail (Optional)</param>
-    public HeliumExecuteSqlQueryResultMessage(HeliumAction heliumAction, HeliumActionResult actionResult, IActorRef originalSender, 
-                                              object originalMessage, IEnumerable<object> resultData = null, object errorDetail = null)
-      : base(originalSender, originalMessage)
+    public HeliumExecuteSqlQueryResultMessage(HeliumAction heliumAction, HeliumActionResult actionResult, 
+                                              IEnumerable<object> resultData = null, object errorDetail = null)
     {
       HeliumAction = heliumAction;
       ActionResult = actionResult;

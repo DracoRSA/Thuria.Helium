@@ -2,12 +2,12 @@
 using FluentAssertions;
 
 using Thuria.Helium.Core;
-using Thuria.Helium.Akka.Messages;
+using Thuria.Helium.Akka.Core.Messages;
 
-namespace Thuria.Helium.Akka.Tests.Messages
+namespace Thuria.Helium.Akka.Core.Tests
 {
   [TestFixture]
-  public class TestHeliumExecuteSqlQueryMessage
+  public class TestHeliumActionMessage
   {
     [Test]
     public void Constructor()
@@ -15,9 +15,9 @@ namespace Thuria.Helium.Akka.Tests.Messages
       //---------------Set up test pack-------------------
       //---------------Assert Precondition----------------
       //---------------Execute Test ----------------------
-      var executeSqlQueryMessage = new HeliumExecuteSqlQueryMessage("dbContext", HeliumAction.Retrieve, "SELECT * FROM [Test]");
+      var actionMessage = new HeliumActionMessage(HeliumAction.None, null);
       //---------------Test Result -----------------------
-      executeSqlQueryMessage.Should().NotBeNull();
+      actionMessage.Should().NotBeNull();
     }
   }
 }

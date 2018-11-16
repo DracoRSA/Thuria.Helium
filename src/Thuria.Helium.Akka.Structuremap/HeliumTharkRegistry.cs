@@ -2,6 +2,8 @@
 
 using Thuria.Thark.Core.DataAccess;
 using Thuria.Thark.DataAccess.Builders;
+using Thuria.Thark.Core.Statement.Builders;
+using Thuria.Thark.StatementBuilder.Builders;
 
 namespace Thuria.Helium.Akka.Structuremap
 {
@@ -16,6 +18,8 @@ namespace Thuria.Helium.Akka.Structuremap
     public HeliumTharkRegistry()
     {
       For<IDatabaseBuilder>().Use<DatabaseBuilder>();
+      For<ISelectStatementBuilder>().Use<SelectStatementBuilder>();
+      For<IConditionBuilder>().Use<ConditionBuilder>();
     }
   }
 }

@@ -67,10 +67,16 @@ namespace Thuria.Helium.Akka.Nancy
         var actionMessage       = new HeliumActionMessage(HeliumAction.Retrieve, requestModel.RequestData);
         var actionResultMessage = await retrieveActor.Ask<HeliumActionResultMessage>(actionMessage);
 
-        return new HeliumResponse
+        var heliumResponse = new HeliumResponse
           {
             ActionResult = actionResultMessage.HeliumActionResult,
+            ResultData   = actionResultMessage.ResultData,
+            ErrorDetail  = actionResultMessage.ErrorDetail
           };
+
+        _thuriaLogger.LogMessage(LogSeverity.Info, $"Completed Helium Retrieve Request [{heliumResponse.ActionResult}]");
+
+        return heliumResponse;
       }
       catch (Exception runtimeException)
       {

@@ -16,5 +16,10 @@ namespace Thuria.Helium.Core
     /// Result Data
     /// </summary>
     public IEnumerable<object> ResultData { get; set; }
+
+    /// <summary>
+    /// Result Error Details
+    /// </summary>
+    public string ErrorDetail { get; set; }
   }
 }

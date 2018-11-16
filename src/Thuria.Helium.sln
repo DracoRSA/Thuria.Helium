@@ -19,7 +19,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Thuria.Helium.Akka.Structur
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Thuria.Helium.Akka.Nancy", "Thuria.Helium.Akka.Nancy\Thuria.Helium.Akka.Nancy.csproj", "{722B8089-BD55-49D6-AC1E-E8B5C10D7D03}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Thuria.Helium.Core", "Thuria.Helium.Core\Thuria.Helium.Core.csproj", "{68854719-A2D5-40ED-BC9E-7AC9A3C91C8D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Thuria.Helium.Core", "Thuria.Helium.Core\Thuria.Helium.Core.csproj", "{68854719-A2D5-40ED-BC9E-7AC9A3C91C8D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Thuria.Helium.Akka.Core.Tests", "Thuria.Helium.Akka.Core.Tests\Thuria.Helium.Akka.Core.Tests.csproj", "{A16EA11D-473A-4973-845B-47376A98CCC7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Thuria.Helium.Akka.Nancy.Tests", "Thuria.Helium.Akka.Nancy.Tests\Thuria.Helium.Akka.Nancy.Tests.csproj", "{F82AD120-01C6-4791-8979-F65EE2DF05CD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Thuria.Helium.Akka.Structuremap.Tests", "Thuria.Helium.Akka.Structuremap.Tests\Thuria.Helium.Akka.Structuremap.Tests.csproj", "{F381A6C2-F0B0-474E-8E67-7F60392B78C9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Thuria.Helium.Core.Tests", "Thuria.Helium.Core.Tests\Thuria.Helium.Core.Tests.csproj", "{1DFA0C5D-A14A-4347-ABC1-A14193DE9079}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +59,22 @@ Global
 		{68854719-A2D5-40ED-BC9E-7AC9A3C91C8D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{68854719-A2D5-40ED-BC9E-7AC9A3C91C8D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{68854719-A2D5-40ED-BC9E-7AC9A3C91C8D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A16EA11D-473A-4973-845B-47376A98CCC7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A16EA11D-473A-4973-845B-47376A98CCC7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A16EA11D-473A-4973-845B-47376A98CCC7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A16EA11D-473A-4973-845B-47376A98CCC7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F82AD120-01C6-4791-8979-F65EE2DF05CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F82AD120-01C6-4791-8979-F65EE2DF05CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F82AD120-01C6-4791-8979-F65EE2DF05CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F82AD120-01C6-4791-8979-F65EE2DF05CD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F381A6C2-F0B0-474E-8E67-7F60392B78C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F381A6C2-F0B0-474E-8E67-7F60392B78C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F381A6C2-F0B0-474E-8E67-7F60392B78C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F381A6C2-F0B0-474E-8E67-7F60392B78C9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1DFA0C5D-A14A-4347-ABC1-A14193DE9079}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1DFA0C5D-A14A-4347-ABC1-A14193DE9079}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1DFA0C5D-A14A-4347-ABC1-A14193DE9079}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1DFA0C5D-A14A-4347-ABC1-A14193DE9079}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -40,6 +40,12 @@
             Start the Helium Action Processing
             </summary>
         </member>
+        <member name="M:Thuria.Helium.Akka.Actors.HeliumActionActorBase.Unhandled(System.Object)">
+            <summary>
+            Unhandled message handler
+            </summary>
+            <param name="message"></param>
+        </member>
         <member name="T:Thuria.Helium.Akka.Actors.HeliumActorBase">
             <summary>
             Helium Actor Base
@@ -60,7 +66,7 @@
             Helium Construct Select SQL Query Actor
             </summary>
         </member>
-        <member name="M:Thuria.Helium.Akka.Actors.HeliumConstructSelectSqlQueryActor.#ctor">
+        <member name="M:Thuria.Helium.Akka.Actors.HeliumConstructSelectSqlQueryActor.#ctor(Thuria.Thark.Core.Statement.Builders.ISelectStatementBuilder,Thuria.Thark.Core.Statement.Builders.IConditionBuilder)">
             <summary>
             Helium Construct Select SQL Query Actor Constructor
             </summary>
@@ -69,6 +75,12 @@
             <summary>
             Helium Construct SQL Query Base Actor
             </summary>
+        </member>
+        <member name="M:Thuria.Helium.Akka.Actors.HeliumConstructSqlQueryActorBase.#ctor(Thuria.Thark.Core.Statement.Builders.IConditionBuilder)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="conditionBuilder">Condition Builder</param>
         </member>
         <member name="M:Thuria.Helium.Akka.Actors.HeliumConstructSqlQueryActorBase.GetWhereConditionsForDataModel(Thuria.Thark.DataModel.TharkAction,System.Object)">
             <summary>
@@ -109,6 +121,9 @@
             Helium Retrieve Actor Constructor
             </summary>
         </member>
+        <member name="M:Thuria.Helium.Akka.Actors.HeliumRetrieveActor.ReadyToPerformAction">
+            <inheritdoc />
+        </member>
         <member name="M:Thuria.Helium.Akka.Actors.HeliumRetrieveActor.StartHeliumActionProcessing(Thuria.Helium.Akka.Core.Messages.HeliumActionMessage)">
             <inheritdoc />
         </member>
@@ -134,15 +149,23 @@
             Helium Stateful Message
             </summary>
         </member>
-        <member name="P:Thuria.Helium.Akka.IHeliumStatefulMessage.OriginalSender">
+        <member name="P:Thuria.Helium.Akka.IHeliumStatefulMessage.MessageStateData">
             <summary>
-            Original Actor that sent the message
+            Message State Data
             </summary>
         </member>
-        <member name="P:Thuria.Helium.Akka.IHeliumStatefulMessage.OriginalMessage">
+        <member name="M:Thuria.Helium.Akka.IHeliumStatefulMessage.AddStateData(System.String,System.Object)">
             <summary>
-            Original Message
+            Add Message State Data
             </summary>
+            <param name="dataKey">Message State Data Key</param>
+            <param name="stateData">Message State Data</param>
+        </member>
+        <member name="M:Thuria.Helium.Akka.IHeliumStatefulMessage.AddStateData(System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            Add Message State Data
+            </summary>
+            <param name="stateData">Dictionary of State Data to add the current message State Data</param>
         </member>
         <member name="T:Thuria.Helium.Akka.IHeliumStatefulResultMessage">
             <summary>
@@ -154,17 +177,21 @@
             Helium Construct SQL Query Message
             </summary>
         </member>
-        <member name="M:Thuria.Helium.Akka.Messages.HeliumConstructSqlQueryMessage.#ctor(Thuria.Helium.Core.HeliumAction,Akka.Actor.IActorRef,System.Object)">
+        <member name="M:Thuria.Helium.Akka.Messages.HeliumConstructSqlQueryMessage.#ctor(Thuria.Helium.Core.HeliumAction,System.Object)">
             <summary>
             Helium Const SQL Query Message Constructor
             </summary>
             <param name="heliumAction">Helium Action</param>
-            <param name="originalSender">Original Sender of the message</param>
-            <param name="originalMessage">Original Message</param>
+            <param name="dataModel">Data Model</param>
         </member>
         <member name="P:Thuria.Helium.Akka.Messages.HeliumConstructSqlQueryMessage.HeliumAction">
             <summary>
             Helium Action
+            </summary>
+        </member>
+        <member name="P:Thuria.Helium.Akka.Messages.HeliumConstructSqlQueryMessage.DataModel">
+            <summary>
+            Data Model
             </summary>
         </member>
         <member name="T:Thuria.Helium.Akka.Messages.HeliumConstructSqlQueryResultMessage">
@@ -172,14 +199,12 @@
             Helium Construct SQL Query Result Message
             </summary>
         </member>
-        <member name="M:Thuria.Helium.Akka.Messages.HeliumConstructSqlQueryResultMessage.#ctor(Thuria.Helium.Core.HeliumAction,System.String,Akka.Actor.IActorRef,System.Object)">
+        <member name="M:Thuria.Helium.Akka.Messages.HeliumConstructSqlQueryResultMessage.#ctor(Thuria.Helium.Core.HeliumAction,System.String)">
             <summary>
             Helium Construct SQL Query Result Message
             </summary>
             <param name="heliumAction">Helium Action</param>
             <param name="sqlQuery">Created SQL Query</param>
-            <param name="originalSender"></param>
-            <param name="originalMessage"></param>
         </member>
         <member name="P:Thuria.Helium.Akka.Messages.HeliumConstructSqlQueryResultMessage.HeliumAction">
             <summary>
@@ -196,15 +221,13 @@
             Helium Execute SQL Query Message
             </summary>
         </member>
-        <member name="M:Thuria.Helium.Akka.Messages.HeliumExecuteSqlQueryMessage.#ctor(System.String,Thuria.Helium.Core.HeliumAction,System.String,Akka.Actor.IActorRef,System.Object)">
+        <member name="M:Thuria.Helium.Akka.Messages.HeliumExecuteSqlQueryMessage.#ctor(System.String,Thuria.Helium.Core.HeliumAction,System.String)">
             <summary>
             Helium Execute SQL Query Message Constructor
             </summary>
             <param name="dbContextName">Database Context Name</param>
             <param name="heliumAction">Helium Action</param>
             <param name="sqlQuery">SQL Query to be executed</param>
-            <param name="originalSender"></param>
-            <param name="originalMessage"></param>
         </member>
         <member name="P:Thuria.Helium.Akka.Messages.HeliumExecuteSqlQueryMessage.DatabaseContextName">
             <summary>
@@ -226,14 +249,12 @@
             Helium Execute SQL Query Result message
             </summary>
         </member>
-        <member name="M:Thuria.Helium.Akka.Messages.HeliumExecuteSqlQueryResultMessage.#ctor(Thuria.Helium.Core.HeliumAction,Thuria.Helium.Core.HeliumActionResult,Akka.Actor.IActorRef,System.Object,System.Collections.Generic.IEnumerable{System.Object},System.Object)">
+        <member name="M:Thuria.Helium.Akka.Messages.HeliumExecuteSqlQueryResultMessage.#ctor(Thuria.Helium.Core.HeliumAction,Thuria.Helium.Core.HeliumActionResult,System.Collections.Generic.IEnumerable{System.Object},System.Object)">
             <summary>
             Helium Execute SQL Query Result message constructor
             </summary>
             <param name="heliumAction">Helium Action</param>
             <param name="actionResult">Helium Action Result</param>
-            <param name="originalSender"></param>
-            <param name="originalMessage"></param>
             <param name="resultData">Result Data (Optional)</param>
             <param name="errorDetail">Error Detail (Optional)</param>
         </member>
@@ -262,13 +283,11 @@
             Helium Get Connection String message
             </summary>
         </member>
-        <member name="M:Thuria.Helium.Akka.Messages.HeliumGetConnectionStringMessage.#ctor(System.String,Akka.Actor.IActorRef,System.Object)">
+        <member name="M:Thuria.Helium.Akka.Messages.HeliumGetConnectionStringMessage.#ctor(System.String)">
             <summary>
             Helium Get Connection String message constructor
             </summary>
             <param name="dbContextName">Database Context name</param>
-            <param name="originalSender">Original Actor that sent the Message</param>
-            <param name="originalMessage">Original Message</param>
         </member>
         <member name="P:Thuria.Helium.Akka.Messages.HeliumGetConnectionStringMessage.DbContextName">
             <summary>
@@ -280,13 +299,11 @@
             Helium Get Connection String Result Message
             </summary>
         </member>
-        <member name="M:Thuria.Helium.Akka.Messages.HeliumGetConnectionStringResultMessage.#ctor(System.String,Akka.Actor.IActorRef,System.Object)">
+        <member name="M:Thuria.Helium.Akka.Messages.HeliumGetConnectionStringResultMessage.#ctor(System.String)">
             <summary>
             Helium Get Connection String Result Message constructor
             </summary>
             <param name="connectionString">Connection String</param>
-            <param name="originalSender">Original Actor that sent the message</param>
-            <param name="originalMessage">Original Message</param>
         </member>
         <member name="P:Thuria.Helium.Akka.Messages.HeliumGetConnectionStringResultMessage.ConnectionString">
             <summary>
@@ -298,22 +315,14 @@
             Helium Stateful Message base class
             </summary>
         </member>
-        <member name="M:Thuria.Helium.Akka.Messages.HeliumStatefulMessage.#ctor(Akka.Actor.IActorRef,System.Object)">
-            <summary>
-            Helium Stateful Message constructor
-            </summary>
-            <param name="originalSender">Original Actor that sent the message</param>
-            <param name="originalMessage">Original Message</param>
+        <member name="P:Thuria.Helium.Akka.Messages.HeliumStatefulMessage.MessageStateData">
+            <inheritdoc />
         </member>
-        <member name="P:Thuria.Helium.Akka.Messages.HeliumStatefulMessage.OriginalSender">
-            <summary>
-            Original Actor that sent the message
-            </summary>
+        <member name="M:Thuria.Helium.Akka.Messages.HeliumStatefulMessage.AddStateData(System.String,System.Object)">
+            <inheritdoc />
         </member>
-        <member name="P:Thuria.Helium.Akka.Messages.HeliumStatefulMessage.OriginalMessage">
-            <summary>
-            Original Message
-            </summary>
+        <member name="M:Thuria.Helium.Akka.Messages.HeliumStatefulMessage.AddStateData(System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <inheritdoc />
         </member>
     </members>
 </doc>

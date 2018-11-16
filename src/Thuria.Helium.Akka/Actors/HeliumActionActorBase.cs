@@ -52,6 +52,16 @@ namespace Thuria.Helium.Akka.Actors
     /// </summary>
     protected abstract void StartHeliumActionProcessing(HeliumActionMessage actionMessage);
 
+    /// <summary>
+    /// Unhandled message handler
+    /// </summary>
+    /// <param name="message"></param>
+    protected override void Unhandled(object message)
+    {
+      ActorLogger.Log(LogLevel.WarningLevel, $"Unhandled message received -> {message}");
+      base.Unhandled(message);
+    }
+
     private void HandleHeliumAction(HeliumActionMessage actionMessage)
     {
       ActorLogger.Log(LogLevel.InfoLevel, $"Starting Helium Action : {actionMessage.HeliumAction}");

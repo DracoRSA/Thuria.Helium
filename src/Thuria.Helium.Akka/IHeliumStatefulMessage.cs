@@ -1,4 +1,4 @@
-﻿using Akka.Actor;
+﻿using System.Collections.Generic;
 
 namespace Thuria.Helium.Akka
 {
@@ -8,13 +8,21 @@ namespace Thuria.Helium.Akka
   public interface IHeliumStatefulMessage
   {
     /// <summary>
-    /// Original Actor that sent the message
+    /// Message State Data
     /// </summary>
-    IActorRef OriginalSender { get; }
+    IDictionary<string, object> MessageStateData { get; }
 
     /// <summary>
-    /// Original Message
+    /// Add Message State Data
     /// </summary>
-    object OriginalMessage { get; }
+    /// <param name="dataKey">Message State Data Key</param>
+    /// <param name="stateData">Message State Data</param>
+    void AddStateData(string dataKey, object stateData);
+
+    /// <summary>
+    /// Add Message State Data
+    /// </summary>
+    /// <param name="stateData">Dictionary of State Data to add the current message State Data</param>
+    void AddStateData(IDictionary<string, object> stateData);
   }
 }

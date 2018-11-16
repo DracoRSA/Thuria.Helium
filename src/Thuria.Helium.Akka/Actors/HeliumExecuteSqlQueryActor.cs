@@ -33,49 +33,76 @@ namespace Thuria.Helium.Akka.Actors
 
     private void HandleExecuteSqlQuery(HeliumExecuteSqlQueryMessage sqlQueryMessage)
     {
-      var retrieveConnectionStringMessage = new HeliumGetConnectionStringMessage(sqlQueryMessage.DatabaseContextName, Sender, sqlQueryMessage);
-      _connectionStringActor.Tell(retrieveConnectionStringMessage);
+      var getConnectionStringMessage = new HeliumGetConnectionStringMessage(sqlQueryMessage.DatabaseContextName);
+      getConnectionStringMessage.AddStateData(sqlQueryMessage.MessageStateData);
+
+      getConnectionStringMessage.AddStateData("Sender", Sender);
+      getConnectionStringMessage.AddStateData("HeliumAction", sqlQueryMessage.HeliumAction);
+      getConnectionStringMessage.AddStateData("SqlQuery", sqlQueryMessage.SqlQuery);
+
+      _connectionStringActor.Tell(getConnectionStringMessage);
     }
 
     private void HandleConnectionStringResult(HeliumGetConnectionStringResultMessage resultMessage)
     {
-      var sqlQueryMessage = (HeliumExecuteSqlQueryMessage)resultMessage.OriginalMessage;
+      var heliumAction   = (HeliumAction)ExtractMessageStateData(resultMessage.MessageStateData, "HeliumAction");
+      var originalSender = (IActorRef)ExtractMessageStateData(resultMessage.MessageStateData, "Sender");
+      var sqlQuery       = (string)ExtractMessageStateData(resultMessage.MessageStateData, "SqlQuery");
 
       try
-      { 
-        switch (sqlQueryMessage.HeliumAction)
+      {
+        IEnumerable<object> resultData = null;
+
+        switch (heliumAction)
         {
           case HeliumAction.Retrieve:
-            ExecuteSelectSqlQuery(resultMessage.ConnectionString, sqlQueryMessage);
+            resultData = ExecuteSelectSqlQuery(resultMessage.ConnectionString, sqlQuery);
             break;
 
           default:
-            throw new Exception($"Helium Action [{sqlQueryMessage} not currently supported]");
+            throw new Exception($"Helium Action [{heliumAction}] not currently supported");
         }
+
+        SendResultMessage(originalSender, heliumAction, HeliumActionResult.Success, resultData, resultData, resultMessage.MessageStateData);
       }
       catch (Exception runtimeException)
       {
-        SendActorResultMessage(sqlQueryMessage.HeliumAction, HeliumActionResult.Error, sqlQueryMessage, errorDetail: runtimeException);
+        SendResultMessage(originalSender, heliumAction, 
+                          HeliumActionResult.Error, errorDetail: runtimeException, messageStateData: resultMessage.MessageStateData);
       }
     }
 
-    private void ExecuteSelectSqlQuery(string connectionString, HeliumExecuteSqlQueryMessage executeSqlQueryMessage)
+    private IEnumerable<object> ExecuteSelectSqlQuery(string connectionString, string sqlQuery)
     {
       using (var databaseContext = _databaseBuilder.WithDatabaseProviderType(DatabaseProviderType.SqlServer)
                                                    .WithConnectionString(connectionString)
                                                    .BuildReadonly())
       {
-        var resultData = databaseContext.Select<object>(executeSqlQueryMessage.SqlQuery);
-        SendActorResultMessage(HeliumAction.Retrieve, HeliumActionResult.Success, executeSqlQueryMessage, resultData);
+        return databaseContext.Select<object>(sqlQuery);
       }
     }
 
-    private void SendActorResultMessage(HeliumAction heliumAction, HeliumActionResult heliumActionResult,
-                                        HeliumExecuteSqlQueryMessage executeSqlQueryMessage, IEnumerable<object> resultData = null, object errorDetail = null)
+    private void SendResultMessage(IActorRef originalSender, HeliumAction heliumAction, 
+                                   HeliumActionResult heliumActionResult, IEnumerable<object> resultData = null, object errorDetail = null,
+                                   IDictionary<string, object> messageStateData = null)
     {
-      var resultMessage  = new HeliumExecuteSqlQueryResultMessage(heliumAction, heliumActionResult, executeSqlQueryMessage.OriginalSender, 
-                                                                  executeSqlQueryMessage.OriginalMessage, resultData, errorDetail);
-      executeSqlQueryMessage.OriginalSender.Tell(resultMessage);
+      var executeSqlQueryResultMessage = new HeliumExecuteSqlQueryResultMessage(heliumAction, heliumActionResult, resultData, errorDetail);
+      executeSqlQueryResultMessage.AddStateData(messageStateData);
+
+      originalSender.Tell(executeSqlQueryResultMessage);
+    }
+
+    private object ExtractMessageStateData(IDictionary<string, object> messageData, string dataKey, bool isRequired = true)
+    {
+      if (!messageData.ContainsKey(dataKey) && isRequired)
+      {
+        throw new Exception($"Message State Data not found [{dataKey}]");
+      }
+
+      var stateData = messageData[dataKey];
+      messageData.Remove(dataKey);
+
+      return stateData;
     }
   }
 }

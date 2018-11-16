@@ -1,13 +1,10 @@
 ﻿using NUnit.Framework;
 using FluentAssertions;
 
-using Thuria.Helium.Core;
-using Thuria.Helium.Akka.Messages;
-
-namespace Thuria.Helium.Akka.Tests.Messages
+namespace Thuria.Helium.Core.Tests
 {
   [TestFixture]
-  public class TestHeliumExecuteSqlQueryMessage
+  public class TestHeliumRequestModel
   {
     [Test]
     public void Constructor()
@@ -15,9 +12,9 @@ namespace Thuria.Helium.Akka.Tests.Messages
       //---------------Set up test pack-------------------
       //---------------Assert Precondition----------------
       //---------------Execute Test ----------------------
-      var executeSqlQueryMessage = new HeliumExecuteSqlQueryMessage("dbContext", HeliumAction.Retrieve, "SELECT * FROM [Test]");
+      var requestModel = new HeliumRequestModel();
       //---------------Test Result -----------------------
-      executeSqlQueryMessage.Should().NotBeNull();
+      requestModel.Should().NotBeNull();
     }
   }
 }

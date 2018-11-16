@@ -29,7 +29,9 @@ namespace Thuria.Helium.Akka.Actors
           var connectionString = databaseSettings.GetConnectionString(message.DbContextName);
           ActorLogger.Log(LogLevel.InfoLevel, $"Retrieved Connection String Context: {message.DbContextName} String: {connectionString}");
 
-          var resultMessage = new HeliumGetConnectionStringResultMessage(connectionString, message.OriginalSender, message.OriginalMessage);
+          var resultMessage = new HeliumGetConnectionStringResultMessage(connectionString);
+          resultMessage.AddStateData(message.MessageStateData);
+
           Sender.Tell(resultMessage);
         });
     }

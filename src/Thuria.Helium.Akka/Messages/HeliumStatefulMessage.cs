@@ -1,5 +1,5 @@
-﻿using System;
-using Akka.Actor;
+﻿using System.Collections.Generic;
+using System.Collections.Concurrent;
 
 namespace Thuria.Helium.Akka.Messages
 {
@@ -8,25 +8,22 @@ namespace Thuria.Helium.Akka.Messages
   /// </summary>
   public abstract class HeliumStatefulMessage : IHeliumStatefulMessage
   {
-    /// <summary>
-    /// Helium Stateful Message constructor
-    /// </summary>
-    /// <param name="originalSender">Original Actor that sent the message</param>
-    /// <param name="originalMessage">Original Message</param>
-    protected HeliumStatefulMessage(IActorRef originalSender, object originalMessage)
+    /// <inheritdoc />
+    public IDictionary<string, object> MessageStateData { get; } = new ConcurrentDictionary<string, object>();
+
+    /// <inheritdoc />
+    public void AddStateData(string dataKey , object stateData)
     {
-      OriginalSender  = originalSender ?? throw new ArgumentNullException(nameof(originalSender));
-      OriginalMessage = originalMessage;
+      MessageStateData.Add(dataKey, stateData);
     }
 
-    /// <summary>
-    /// Original Actor that sent the message
-    /// </summary>
-    public IActorRef OriginalSender { get; }
-
-    /// <summary>
-    /// Original Message
-    /// </summary>
-    public object OriginalMessage { get; }
+    /// <inheritdoc />
+    public void AddStateData(IDictionary<string, object> stateData)
+    {
+      foreach (var currentStateData in stateData)
+      {
+        MessageStateData.Add(currentStateData.Key, currentStateData.Value);
+      }
+    }
   }
 }

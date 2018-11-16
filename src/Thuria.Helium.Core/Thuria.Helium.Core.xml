@@ -74,5 +74,10 @@
             Result Data
             </summary>
         </member>
+        <member name="P:Thuria.Helium.Core.HeliumResponse.ErrorDetail">
+            <summary>
+            Result Error Details
+            </summary>
+        </member>
     </members>
 </doc>
