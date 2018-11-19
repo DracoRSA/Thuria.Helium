@@ -61,6 +61,16 @@
             Actor Logger
             </summary>
         </member>
+        <member name="T:Thuria.Helium.Akka.Actors.HeliumConstructInsertSqlQueryActor">
+            <summary>
+            Helium Construct Insert SQL Query Actor
+            </summary>
+        </member>
+        <member name="M:Thuria.Helium.Akka.Actors.HeliumConstructInsertSqlQueryActor.#ctor(Thuria.Thark.Core.Statement.Builders.IInsertStatementBuilder,Thuria.Thark.Core.Statement.Builders.IConditionBuilder)">
+            <summary>
+            Helium Construct Select SQL Query Actor Constructor
+            </summary>
+        </member>
         <member name="T:Thuria.Helium.Akka.Actors.HeliumConstructSelectSqlQueryActor">
             <summary>
             Helium Construct Select SQL Query Actor
@@ -110,6 +120,22 @@
             Helium File Connection String Actor constructor
             </summary>
             <param name="databaseSettings"></param>
+        </member>
+        <member name="T:Thuria.Helium.Akka.Actors.HeliumInsertActor">
+            <summary>
+            Retrieve Helium Action Actor
+            </summary>
+        </member>
+        <member name="M:Thuria.Helium.Akka.Actors.HeliumInsertActor.#ctor">
+            <summary>
+            Helium Insert Actor Constructor
+            </summary>
+        </member>
+        <member name="M:Thuria.Helium.Akka.Actors.HeliumInsertActor.ReadyToPerformAction">
+            <inheritdoc />
+        </member>
+        <member name="M:Thuria.Helium.Akka.Actors.HeliumInsertActor.StartHeliumActionProcessing(Thuria.Helium.Akka.Core.Messages.HeliumActionMessage)">
+            <inheritdoc />
         </member>
         <member name="T:Thuria.Helium.Akka.Actors.HeliumRetrieveActor">
             <summary>

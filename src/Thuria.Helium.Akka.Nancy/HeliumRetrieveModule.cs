@@ -2,9 +2,7 @@
 using System.Threading.Tasks;
 
 using Nancy;
-using Nancy.IO;
 using Akka.Actor;
-using Nancy.Extensions;
 using Nancy.Responses.Negotiation;
 
 using Thuria.Helium.Core;
@@ -18,12 +16,9 @@ namespace Thuria.Helium.Akka.Nancy
   /// <summary>
   /// Helium Retrieve Nancy Module
   /// </summary>
-  public class HeliumRetrieveModule : NancyModule
+  public class HeliumRetrieveModule : HeliumBaseModule
   {
     private readonly IThuriaActorSystem _tharkActorSystem;
-    private readonly IThuriaSerializer _thuriaSerializer;
-    private readonly IResponseNegotiator _responseNegotiator;
-    private readonly IThuriaLogger _thuriaLogger;
 
     /// <summary>
     /// Helium Retrieve Module constructor
@@ -33,34 +28,25 @@ namespace Thuria.Helium.Akka.Nancy
     /// <param name="responseNegotiator">Response Negotiator</param>
     /// <param name="thuriaLogger">Thuria Logger</param>
     public HeliumRetrieveModule(IThuriaActorSystem heliumActorSystem, IThuriaSerializer thuriaSerializer, IResponseNegotiator responseNegotiator, IThuriaLogger thuriaLogger) 
-      : base("helium")
+      : base(thuriaSerializer, responseNegotiator, thuriaLogger)
     {
-      _tharkActorSystem   = heliumActorSystem ?? throw new ArgumentNullException(nameof(heliumActorSystem));
-      _thuriaSerializer   = thuriaSerializer ?? throw new ArgumentNullException(nameof(thuriaSerializer));
-      _responseNegotiator = responseNegotiator ?? throw new ArgumentNullException(nameof(responseNegotiator));
-      _thuriaLogger       = thuriaLogger ?? throw new ArgumentNullException(nameof(thuriaLogger));
+      _tharkActorSystem = heliumActorSystem ?? throw new ArgumentNullException(nameof(heliumActorSystem));
 
       Post("/retrieve", async (parameters, token) => await ProcessRequest());
+
+      ThuriaLogger.LogMessage(LogSeverity.Info, "Helium Retrieve ready to receive requests");
     }
 
     private async Task<object> ProcessRequest()
     {
-      _thuriaLogger.LogMessage(LogSeverity.Info, "Received Helium Retrieve Request");
-
-      if (Request.Body.Length <= 0)
-      {
-        _thuriaLogger.LogMessage(LogSeverity.Exception, "Exception: No content received in request");
-        throw new BadRequestServiceErrorException("No content received in request");
-      }
+      ThuriaLogger.LogMessage(LogSeverity.Info, "Received Helium Retrieve Request");
 
       try
       {
-        var jsonData     = ((RequestStream)Request.Body).AsString();
-        var requestModel = _thuriaSerializer.DeserializeObject<HeliumRequestModel>(jsonData);
-
-        if (requestModel == null || requestModel.RequestData == null)
+        var (requestModel, errorResponse) = GetHeliumRequest();
+        if (errorResponse != null)
         {
-          throw new Exception("Invalid / Missing Request Data Model received");
+          return errorResponse;
         }
 
         var retrieveActor       = _tharkActorSystem.ActorSystem.ActorSelection("/user/HeliumRetrieveAction");
@@ -74,13 +60,13 @@ namespace Thuria.Helium.Akka.Nancy
             ErrorDetail  = actionResultMessage.ErrorDetail
           };
 
-        _thuriaLogger.LogMessage(LogSeverity.Info, $"Completed Helium Retrieve Request [{heliumResponse.ActionResult}]");
+        ThuriaLogger.LogMessage(LogSeverity.Info, $"Completed Helium Retrieve Request [{heliumResponse.ActionResult}]");
 
-        return heliumResponse;
+        return CreateResponse(Context, HttpStatusCode.OK, heliumResponse);
       }
       catch (Exception runtimeException)
       {
-        _thuriaLogger.LogMessage(LogSeverity.Exception, $"Exception: {runtimeException}");
+        ThuriaLogger.LogMessage(LogSeverity.Exception, $"Exception: {runtimeException}");
         throw new InternalServerErrorException("Error occurred processing Helium Retrieve Action Request", runtimeException);
       }
     }

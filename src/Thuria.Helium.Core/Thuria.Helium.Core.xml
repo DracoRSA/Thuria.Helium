@@ -19,6 +19,11 @@
             Perform a retrieve
             </summary>
         </member>
+        <member name="F:Thuria.Helium.Core.HeliumAction.Insert">
+            <summary>
+            Perform an insert
+            </summary>
+        </member>
         <member name="T:Thuria.Helium.Core.HeliumActionResult">
             <summary>
             Helium Action Result enumeration

@@ -13,7 +13,12 @@
     /// <summary>
     /// Perform a retrieve
     /// </summary>
-    Retrieve
+    Retrieve,
+
+    /// <summary>
+    /// Perform an insert
+    /// </summary>
+    Insert
   }
 
   /// <summary>

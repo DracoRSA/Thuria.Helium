@@ -42,7 +42,7 @@ namespace Thuria.Helium.Akka.Actors
     /// </summary>
     protected virtual void ReadyToPerformAction()
     {
-      ActorLogger.Log(LogLevel.InfoLevel, $"Ready to perform Helium {HeliumAction} Action");
+      ActorLogger.Log(LogLevel.InfoLevel, $"Helium Actor ready to process {HeliumAction} Action");
 
       Receive<HeliumActionMessage>(HandleHeliumAction, message => message.HeliumAction == HeliumAction);
     }

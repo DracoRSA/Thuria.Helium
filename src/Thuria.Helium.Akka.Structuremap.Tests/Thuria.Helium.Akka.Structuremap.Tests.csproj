@@ -10,6 +10,7 @@
     <PackageReference Include="NSubstitute" Version="3.1.0" />
     <PackageReference Include="NUnit3TestAdapter" Version="3.11.0" />
     <PackageReference Include="Thuria.Calot.TestUtilities" Version="0.0.7-beta" />
+    <PackageReference Include="Thuria.Zitidar.Structuremap" Version="0.0.14-beta" />
   </ItemGroup>
 
   <ItemGroup>

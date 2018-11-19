@@ -10,19 +10,19 @@ namespace Thuria.Helium.Akka.Actors
   /// <summary>
   /// Retrieve Helium Action Actor
   /// </summary>
-  public class HeliumRetrieveActor : HeliumActionActorBase
+  public class HeliumInsertActor : HeliumActionActorBase
   {
-    private readonly IActorRef _constructSelectSqlQueryActor;
+    private readonly IActorRef _constructInsertSqlQueryActor;
     private readonly IActorRef _executeSqlQueryActor;
 
     /// <summary>
-    /// Helium Retrieve Actor Constructor
+    /// Helium Insert Actor Constructor
     /// </summary>
-    public HeliumRetrieveActor() 
-      : base(HeliumAction.Retrieve)
+    public HeliumInsertActor() 
+      : base(HeliumAction.Insert)
     {
-      _constructSelectSqlQueryActor = Context.ActorOf(Context.DI().Props<HeliumConstructSelectSqlQueryActor>(), $"HeliumConstructSelectSqlQuery_{HeliumAction.Retrieve}");
-      _executeSqlQueryActor         = Context.ActorOf(Context.DI().Props<HeliumExecuteSqlQueryActor>(), $"HeliumExecuteSqlQuery_{HeliumAction.Retrieve}");
+      _constructInsertSqlQueryActor = Context.ActorOf(Context.DI().Props<HeliumConstructInsertSqlQueryActor>(), $"HeliumConstructInsertSqlQuery_{HeliumAction.Insert}");
+      _executeSqlQueryActor         = Context.ActorOf(Context.DI().Props<HeliumExecuteSqlQueryActor>(), $"HeliumExecuteSqlQuery_{HeliumAction.Insert}");
     }
 
     /// <inheritdoc />
@@ -30,25 +30,24 @@ namespace Thuria.Helium.Akka.Actors
     {
       base.ReadyToPerformAction();
 
-      Receive<HeliumActionMessage>(StartHeliumActionProcessing, message => message.HeliumAction == HeliumAction.Retrieve);
-      Receive<HeliumConstructSqlQueryResultMessage>(HandleSqlQueryResult, message => message.HeliumAction == HeliumAction.Retrieve);
-      Receive<HeliumExecuteSqlQueryResultMessage>(HandleExecuteSqlQueryResult, message => message.HeliumAction == HeliumAction.Retrieve);
+      Receive<HeliumActionMessage>(StartHeliumActionProcessing, message => message.HeliumAction == HeliumAction.Insert);
+      Receive<HeliumConstructSqlQueryResultMessage>(HandleSqlQueryResult, message => message.HeliumAction == HeliumAction.Insert);
+      Receive<HeliumExecuteSqlQueryResultMessage>(HandleExecuteSqlQueryResult, message => message.HeliumAction == HeliumAction.Insert);
     }
 
     /// <inheritdoc />
     protected override void StartHeliumActionProcessing(HeliumActionMessage actionMessage)
     {
       var sqlQueryMessage = new HeliumConstructSqlQueryMessage(actionMessage.HeliumAction, actionMessage.DataModel);
-      sqlQueryMessage.AddStateData("OriginalRetrieveSender", Sender);
-      sqlQueryMessage.AddStateData("OriginalRetrieveMessage", actionMessage);
+      sqlQueryMessage.AddStateData("OriginalInsertSender", Sender);
+      sqlQueryMessage.AddStateData("OriginalInsertMessage", actionMessage);
 
-      _constructSelectSqlQueryActor.Tell(sqlQueryMessage);
+      _constructInsertSqlQueryActor.Tell(sqlQueryMessage);
     }
 
     private void HandleSqlQueryResult(HeliumConstructSqlQueryResultMessage sqlQueryResultMessage)
     {
-      var originalMessage = (HeliumActionMessage)sqlQueryResultMessage.MessageStateData["OriginalRetrieveMessage"];
-
+      var originalMessage        = (HeliumActionMessage)sqlQueryResultMessage.MessageStateData["OriginalInsertMessage"];
       var executeSqlQueryMessage = new HeliumExecuteSqlQueryMessage(originalMessage.DatabaseContextName, originalMessage.HeliumAction, sqlQueryResultMessage.SqlQuery);
       executeSqlQueryMessage.AddStateData(sqlQueryResultMessage.MessageStateData);
 
@@ -57,7 +56,7 @@ namespace Thuria.Helium.Akka.Actors
 
     private void HandleExecuteSqlQueryResult(HeliumExecuteSqlQueryResultMessage executeSqlQueryResultMessage)
     {
-      var originalSender      = (IActorRef)executeSqlQueryResultMessage.MessageStateData["OriginalRetrieveSender"];
+      var originalSender      = (IActorRef)executeSqlQueryResultMessage.MessageStateData["OriginalInsertSender"];
       var actionResultMessage = new HeliumActionResultMessage(HeliumActionResult.Success, executeSqlQueryResultMessage.ResultData, 
                                                               executeSqlQueryResultMessage.ErrorDetail?.ToString());
 

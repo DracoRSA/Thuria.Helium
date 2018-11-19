@@ -10,12 +10,12 @@ namespace Thuria.Helium.Akka.Structuremap
   /// <summary>
   /// Helium Thark IOC Registry
   /// </summary>
-  public class HeliumTharkRegistry : Registry
+  public class HeliumTharkIocRegistry : Registry
   {
     /// <summary>
     /// Constructor
     /// </summary>
-    public HeliumTharkRegistry()
+    public HeliumTharkIocRegistry()
     {
       For<IDatabaseBuilder>().Use<DatabaseBuilder>();
       For<ISelectStatementBuilder>().Use<SelectStatementBuilder>();

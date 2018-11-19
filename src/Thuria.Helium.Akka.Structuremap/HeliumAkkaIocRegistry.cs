@@ -1,8 +1,8 @@
 ﻿using StructureMap;
 
+using Thuria.Zitidar.Core;
 using Thuria.Zitidar.Akka;
 using Thuria.Helium.Akka.Nancy;
-using Thuria.Zitidar.Core;
 
 namespace Thuria.Helium.Akka.Structuremap
 {
@@ -23,8 +23,6 @@ namespace Thuria.Helium.Akka.Structuremap
       For<IThuriaStartable>().Use(context => context.GetInstance<IThuriaActorSystem>("Helium"));
       For<IThuriaStoppable>().Use(context => context.GetInstance<IThuriaActorSystem>("Helium"));
 
-      For<HeliumRetrieveModule>().Use<HeliumRetrieveModule>()
-                                 .Ctor<IThuriaActorSystem>("heliumActorSystem").IsNamedInstance("Helium");
     }
   }
 }

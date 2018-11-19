@@ -29,6 +29,7 @@ namespace Thuria.Helium.Akka
       base.Start();
 
       ActorSystem.ActorOf(ActorSystem.DI().Props<HeliumRetrieveActor>(), "HeliumRetrieveAction");
+      ActorSystem.ActorOf(ActorSystem.DI().Props<HeliumInsertActor>(), "HeliumInsertAction");
     }
   }
 }
