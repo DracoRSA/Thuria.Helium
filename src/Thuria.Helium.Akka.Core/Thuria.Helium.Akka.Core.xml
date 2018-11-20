@@ -4,44 +4,60 @@
         <name>Thuria.Helium.Akka.Core</name>
     </assembly>
     <members>
-        <member name="T:Thuria.Helium.Akka.Core.HeliumAction">
+        <member name="T:Thuria.Helium.Akka.Core.Messages.HeliumActionMessage">
             <summary>
-            Helium Action enumeration
+            Helium Action Message
             </summary>
         </member>
-        <member name="F:Thuria.Helium.Akka.Core.HeliumAction.None">
+        <member name="M:Thuria.Helium.Akka.Core.Messages.HeliumActionMessage.#ctor(Thuria.Helium.Core.HeliumAction,System.Object,System.String)">
             <summary>
-            Perform no Action
+            Helium Action Message Constructor
+            </summary>
+            <param name="heliumAction">Helium Action to perform</param>
+            <param name="dataModel">Action Input Data Model</param>
+            <param name="dbContextName">Database Context Name (Default = Helium)</param>
+        </member>
+        <member name="P:Thuria.Helium.Akka.Core.Messages.HeliumActionMessage.HeliumAction">
+            <summary>
+            Helium Action to be performed
             </summary>
         </member>
-        <member name="F:Thuria.Helium.Akka.Core.HeliumAction.Retrieve">
+        <member name="P:Thuria.Helium.Akka.Core.Messages.HeliumActionMessage.DataModel">
             <summary>
-            Perform a retrieve
+            Input Data Model
             </summary>
         </member>
-        <member name="T:Thuria.Helium.Akka.Core.HeliumActionResult">
+        <member name="P:Thuria.Helium.Akka.Core.Messages.HeliumActionMessage.DatabaseContextName">
             <summary>
-            Helium Action Result enumeration
+            Database Context Name
             </summary>
         </member>
-        <member name="F:Thuria.Helium.Akka.Core.HeliumActionResult.Unknown">
+        <member name="T:Thuria.Helium.Akka.Core.Messages.HeliumActionResultMessage">
             <summary>
-            Result is Unknown
+            Helium Action Result Message
             </summary>
         </member>
-        <member name="F:Thuria.Helium.Akka.Core.HeliumActionResult.Success">
+        <member name="M:Thuria.Helium.Akka.Core.Messages.HeliumActionResultMessage.#ctor(Thuria.Helium.Core.HeliumActionResult,System.Collections.Generic.IEnumerable{System.Object},System.String)">
             <summary>
-            Successful Action
+            Helium Action Result Message Constructor
+            </summary>
+            <param name="heliumActionResult">Helium Action Result</param>
+            <param name="resultData">Result Data (Optional)</param>
+            <param name="errorDetail">Error Details (Optional)</param>
+        </member>
+        <member name="P:Thuria.Helium.Akka.Core.Messages.HeliumActionResultMessage.HeliumActionResult">
+            <summary>
+            Helium Action Result
             </summary>
         </member>
-        <member name="F:Thuria.Helium.Akka.Core.HeliumActionResult.Warning">
+        <member name="P:Thuria.Helium.Akka.Core.Messages.HeliumActionResultMessage.ResultData">
             <summary>
-            Action resulted in warnings issued
+            Helium Action Result Data
             </summary>
         </member>
-        <member name="F:Thuria.Helium.Akka.Core.HeliumActionResult.Error">
+        <member name="P:Thuria.Helium.Akka.Core.Messages.HeliumActionResultMessage.ErrorDetail">
             <summary>
-            Action resulted in errors
+            Error Detail (If any)
             </summary>
         </member>
     </members>
