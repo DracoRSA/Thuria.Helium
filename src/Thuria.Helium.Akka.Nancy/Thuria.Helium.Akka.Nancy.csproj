@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>0.0.1</Version>
+    <Version>0.0.1-beta</Version>
     <Authors>Johan Dercksen</Authors>
     <Company>Draco</Company>
     <Product>Thuria</Product>
@@ -20,7 +20,15 @@
 
   <ItemGroup>
     <PackageReference Include="Nancy" Version="2.0.0-clinteastwood" />
+    <PackageReference Include="Thuria.Zitidar.Akka" Version="0.0.14-beta" />
     <PackageReference Include="Thuria.Zitidar.Core" Version="0.0.17-beta" />
+    <PackageReference Include="Thuria.Zitidar.Nancy" Version="0.0.6-beta" />
+    <PackageReference Include="Thuria.Zitidar.Serialization.Nancy" Version="0.0.2-beta" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Thuria.Helium.Akka.Core\Thuria.Helium.Akka.Core.csproj" />
+    <ProjectReference Include="..\Thuria.Helium.Core\Thuria.Helium.Core.csproj" />
   </ItemGroup>
 
 </Project>

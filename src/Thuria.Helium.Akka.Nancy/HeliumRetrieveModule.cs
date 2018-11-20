@@ -2,97 +2,72 @@
 using System.Threading.Tasks;
 
 using Nancy;
-using Nancy.Extensions;
-using Nancy.IO;
+using Akka.Actor;
 using Nancy.Responses.Negotiation;
 
+using Thuria.Helium.Core;
 using Thuria.Zitidar.Core;
+using Thuria.Zitidar.Akka;
+using Thuria.Zitidar.Nancy;
+using Thuria.Helium.Akka.Core.Messages;
 
 namespace Thuria.Helium.Akka.Nancy
 {
   /// <summary>
   /// Helium Retrieve Nancy Module
   /// </summary>
-  public class HeliumRetrieveModule : NancyModule
+  public class HeliumRetrieveModule : HeliumBaseModule
   {
-    private readonly IThuriaSerializer _thuriaSerializer;
-    private readonly IResponseNegotiator _responseNegotiator;
-    private readonly IThuriaLogger _thuriaLogger;
+    private readonly IThuriaActorSystem _tharkActorSystem;
 
-    public HeliumRetrieveModule(IThuriaSerializer thuriaSerializer, IResponseNegotiator responseNegotiator, IThuriaLogger thuriaLogger) 
-      : base("helium")
+    /// <summary>
+    /// Helium Retrieve Module constructor
+    /// </summary>
+    /// <param name="heliumActorSystem">Thark Actor System</param>
+    /// <param name="thuriaSerializer">Thuria Serializer</param>
+    /// <param name="responseNegotiator">Response Negotiator</param>
+    /// <param name="thuriaLogger">Thuria Logger</param>
+    public HeliumRetrieveModule(IThuriaActorSystem heliumActorSystem, IThuriaSerializer thuriaSerializer, IResponseNegotiator responseNegotiator, IThuriaLogger thuriaLogger) 
+      : base(thuriaSerializer, responseNegotiator, thuriaLogger)
     {
-      _thuriaSerializer   = thuriaSerializer ?? throw new ArgumentNullException(nameof(thuriaSerializer));
-      _responseNegotiator = responseNegotiator ?? throw new ArgumentNullException(nameof(responseNegotiator));
-      _thuriaLogger       = thuriaLogger ?? throw new ArgumentNullException(nameof(thuriaLogger));
+      _tharkActorSystem = heliumActorSystem ?? throw new ArgumentNullException(nameof(heliumActorSystem));
 
       Post("/retrieve", async (parameters, token) => await ProcessRequest());
+
+      ThuriaLogger.LogMessage(LogSeverity.Info, "Helium Retrieve ready to receive requests");
     }
 
-    private async Task<Response> ProcessRequest()
+    private async Task<object> ProcessRequest()
     {
-      if (Request.Body.Length <= 0)
-      {
-        _thuriaLogger.LogMessage(LogSeverity.Exception, "Exception: No content received in request");
-        throw new BadRequestServiceErrorException("No content received in request");
-      }
+      ThuriaLogger.LogMessage(LogSeverity.Info, "Received Helium Retrieve Request");
 
       try
       {
-        var jsonData = ((RequestStream)this.Request.Body).AsString();
-        var requestModel = this.jsonSerializer.DeserializeObject<ExperianServiceRequestDataModel>(jsonData);
-
-        if (requestModel?.InputDataModel == null)
+        var (requestModel, errorResponse) = GetHeliumRequest();
+        if (errorResponse != null)
         {
-          throw new Exception("Invalid / Missing Data Model received");
+          return errorResponse;
         }
 
-        this.executionDataModel = this.CreateExecutionRecord(requestModel);
-        var serviceClient = this.serviceClientRouter.FindClient(requestModel.ServiceName, requestModel.Version);
+        var retrieveActor       = _tharkActorSystem.ActorSystem.ActorSelection("/user/HeliumRetrieveAction");
+        var actionMessage       = new HeliumActionMessage(HeliumAction.Retrieve, requestModel.RequestData);
+        var actionResultMessage = await retrieveActor.Ask<HeliumActionResultMessage>(actionMessage);
 
-        this.sahlLogger.LogMessage(LogSeverity.Info, "Executing Experian Service using " + serviceClient);
+        var heliumResponse = new HeliumResponse
+          {
+            ActionResult = actionResultMessage.HeliumActionResult,
+            ResultData   = actionResultMessage.ResultData,
+            ErrorDetail  = actionResultMessage.ErrorDetail
+          };
 
-        var (outputDataModel, resultMapping) = await serviceClient.ExecuteExperianModel(requestModel.InputDataModel);
+        ThuriaLogger.LogMessage(LogSeverity.Info, $"Completed Helium Retrieve Request [{heliumResponse.ActionResult}]");
 
-        if (!string.IsNullOrEmpty(serviceClient.ErrorDetail))
-        {
-          this.sahlLogger.LogMessage(LogSeverity.Error, "Error: " + serviceClient.ErrorDetail);
-
-          this.executionDataModel.Status = ExperianExecutionStatus.Error.ToString();
-          this.executionDataModel.ExceptionInfo = serviceClient.ErrorDetail;
-        }
-        else
-        {
-          this.sahlLogger.LogMessage(LogSeverity.Info, "Success");
-          this.executionDataModel.Status = ExperianExecutionStatus.Success.ToString();
-        }
-
-        this.executionDataModel.RequestCompleted = DateTime.Now;
-        this.executionDataModel.OutputData = jsonSerializer.SerializeObject(outputDataModel);
-        this.executionDataModel.ResultMapping = string.IsNullOrWhiteSpace(resultMapping) ? null : resultMapping;
-
-        this.CompleteExecutionRecord();
-
-        return new FacadeResultDataModel
-        {
-          ExecutionId = executionDataModel.Id,
-          Status = this.executionDataModel.Status,
-          ResultData = outputDataModel,
-          ErrorDetail = this.executionDataModel.ExceptionInfo
-        };
+        return CreateResponse(Context, HttpStatusCode.OK, heliumResponse);
       }
       catch (Exception runtimeException)
       {
-        this.sahlLogger.LogMessage(LogSeverity.Exception, "Exception: " + runtimeException);
-
-        if (this.executionDataModel != null)
-        {
-          this.executionDataModel.Status = ExperianExecutionStatus.Exception.ToString();
-          this.executionDataModel.ExceptionInfo = runtimeException.BuildExceptionErrorMessage();
-          this.CompleteExecutionRecord();
-        }
-
-        throw new InternalServerErrorException("Error occurred processing Experian Service Request", runtimeException);
+        ThuriaLogger.LogMessage(LogSeverity.Exception, $"Exception: {runtimeException}");
+        throw new InternalServerErrorException("Error occurred processing Helium Retrieve Action Request", runtimeException);
       }
     }
   }

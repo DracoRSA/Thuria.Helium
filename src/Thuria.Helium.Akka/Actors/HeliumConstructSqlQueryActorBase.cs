@@ -1,7 +1,9 @@
-﻿using Thuria.Thark.DataModel;
+﻿using System;
+
+using Thuria.Thark.DataModel;
 using Thuria.Zitidar.Extensions;
 using Thuria.Thark.Core.Statement;
-using Thuria.Thark.StatementBuilder.Builders;
+using Thuria.Thark.Core.Statement.Builders;
 
 namespace Thuria.Helium.Akka.Actors
 {
@@ -10,6 +12,17 @@ namespace Thuria.Helium.Akka.Actors
   /// </summary>
   public abstract class HeliumConstructSqlQueryActorBase : HeliumActorBase
   {
+    private readonly IConditionBuilder _conditionBuilder;
+
+    /// <summary>
+    /// Constructor
+    /// </summary>
+    /// <param name="conditionBuilder">Condition Builder</param>
+    protected HeliumConstructSqlQueryActorBase(IConditionBuilder conditionBuilder)
+    {
+      _conditionBuilder = conditionBuilder ?? throw new ArgumentNullException(nameof(conditionBuilder));
+    }
+
     /// <summary>
     /// Retrieve the Where Conditions for a given Data Model
     /// </summary>
@@ -19,7 +32,6 @@ namespace Thuria.Helium.Akka.Actors
     protected string GetWhereConditionsForDataModel(TharkAction tharkAction, object dataModel)
     {
       var conditionCount      = 0;
-      var builder             = ConditionBuilder.Create;
       var tableName           = dataModel.GetThuriaDataModelTableName();
       var dataModelConditions = dataModel.GetThuriaDataModelConditions(tharkAction);
 
@@ -30,14 +42,14 @@ namespace Thuria.Helium.Akka.Actors
 
         if (conditionCount > 0)
         {
-          builder.WithAnd();
+          _conditionBuilder.WithAnd();
         }
 
-        builder.WithCondition(tableName, currentCondition.ColumnName, EqualityOperators.Equals, propertyValue);
+        _conditionBuilder.WithCondition(tableName, currentCondition.ColumnName, EqualityOperators.Equals, propertyValue);
         conditionCount++;
       }
 
-      return builder.Build();
+      return _conditionBuilder.Build();
     }
   }
 }

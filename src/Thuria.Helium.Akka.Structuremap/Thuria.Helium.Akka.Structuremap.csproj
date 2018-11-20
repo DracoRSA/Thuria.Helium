@@ -21,7 +21,13 @@
   <ItemGroup>
     <PackageReference Include="StructureMap" Version="4.7.0" />
     <PackageReference Include="Thuria.Thark.DataAccess" Version="0.0.6-beta" />
+    <PackageReference Include="Thuria.Zitidar.Akka" Version="0.0.14-beta" />
     <PackageReference Include="Thuria.Zitidar.Core" Version="0.0.17-beta" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Thuria.Helium.Akka.Nancy\Thuria.Helium.Akka.Nancy.csproj" />
+    <ProjectReference Include="..\Thuria.Helium.Akka\Thuria.Helium.Akka.csproj" />
   </ItemGroup>
 
 </Project>

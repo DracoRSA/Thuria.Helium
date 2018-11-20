@@ -1,6 +1,4 @@
-﻿using Akka.Actor;
-
-namespace Thuria.Helium.Akka.Messages
+﻿namespace Thuria.Helium.Akka.Messages
 {
   /// <summary>
   /// Helium Get Connection String message
@@ -11,10 +9,7 @@ namespace Thuria.Helium.Akka.Messages
     /// Helium Get Connection String message constructor
     /// </summary>
     /// <param name="dbContextName">Database Context name</param>
-    /// <param name="originalSender">Original Actor that sent the Message</param>
-    /// <param name="originalMessage">Original Message</param>
-    public HeliumGetConnectionStringMessage(string dbContextName, IActorRef originalSender, object originalMessage)
-      : base(originalSender, originalMessage)
+    public HeliumGetConnectionStringMessage(string dbContextName)
     {
       DbContextName = dbContextName;
     }

@@ -18,4 +18,8 @@
     <DocumentationFile>D:\projects\Thuria.Helium\src\Thuria.Helium.Akka.Core\Thuria.Helium.Akka.Core.xml</DocumentationFile>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Thuria.Helium.Core\Thuria.Helium.Core.csproj" />
+  </ItemGroup>
+
 </Project>

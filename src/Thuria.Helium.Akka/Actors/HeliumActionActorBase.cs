@@ -1,8 +1,8 @@
 ﻿using Akka.Actor;
 using Akka.Event;
 
-using Thuria.Helium.Akka.Core;
-using Thuria.Helium.Akka.Messages;
+using Thuria.Helium.Core;
+using Thuria.Helium.Akka.Core.Messages;
 
 namespace Thuria.Helium.Akka.Actors
 {
@@ -42,7 +42,7 @@ namespace Thuria.Helium.Akka.Actors
     /// </summary>
     protected virtual void ReadyToPerformAction()
     {
-      ActorLogger.Log(LogLevel.InfoLevel, $"Ready to perform Helium {HeliumAction} Action");
+      ActorLogger.Log(LogLevel.InfoLevel, $"Helium Actor ready to process {HeliumAction} Action");
 
       Receive<HeliumActionMessage>(HandleHeliumAction, message => message.HeliumAction == HeliumAction);
     }
@@ -51,6 +51,16 @@ namespace Thuria.Helium.Akka.Actors
     /// Start the Helium Action Processing
     /// </summary>
     protected abstract void StartHeliumActionProcessing(HeliumActionMessage actionMessage);
+
+    /// <summary>
+    /// Unhandled message handler
+    /// </summary>
+    /// <param name="message"></param>
+    protected override void Unhandled(object message)
+    {
+      ActorLogger.Log(LogLevel.WarningLevel, $"Unhandled message received -> {message}");
+      base.Unhandled(message);
+    }
 
     private void HandleHeliumAction(HeliumActionMessage actionMessage)
     {

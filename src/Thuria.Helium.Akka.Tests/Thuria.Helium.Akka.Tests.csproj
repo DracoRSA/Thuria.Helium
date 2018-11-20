@@ -12,8 +12,8 @@
     <PackageReference Include="NUnit3TestAdapter" Version="3.11.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.9.0" />
     <PackageReference Include="Thuria.Calot.TestUtilities" Version="0.0.7-beta" />
-    <PackageReference Include="Thuria.Thark.DataModel" Version="0.0.5-beta" />
-    <PackageReference Include="Thuria.Thark.StatementBuilder" Version="0.0.5-beta" />
+    <PackageReference Include="Thuria.Thark.DataModel" Version="0.0.6-beta" />
+    <PackageReference Include="Thuria.Thark.StatementBuilder" Version="0.0.6-beta" />
     <PackageReference Include="Thuria.Zitidar.Akka" Version="0.0.14-beta" />
     <PackageReference Include="Thuria.Zitidar.Core" Version="0.0.17-beta" />
   </ItemGroup>

@@ -1,11 +1,12 @@
-﻿using Akka.Event;
+﻿using System;
 
+using Akka.Event;
+
+using Thuria.Helium.Core;
 using Thuria.Thark.DataModel;
-using Thuria.Helium.Akka.Core;
-using Thuria.Zitidar.Extensions;
 using Thuria.Helium.Akka.Messages;
+using Thuria.Thark.Core.Statement.Builders;
 using Thuria.Thark.StatementBuilder.Models;
-using Thuria.Thark.StatementBuilder.Builders;
 
 namespace Thuria.Helium.Akka.Actors
 {
@@ -14,24 +15,28 @@ namespace Thuria.Helium.Akka.Actors
   /// </summary>
   public class HeliumConstructSelectSqlQueryActor : HeliumConstructSqlQueryActorBase
   {
+    private readonly ISelectStatementBuilder _selectStatementBuilder;
+
     /// <summary>
     /// Helium Construct Select SQL Query Actor Constructor
     /// </summary>
-    public HeliumConstructSelectSqlQueryActor()
+    public HeliumConstructSelectSqlQueryActor(ISelectStatementBuilder selectStatementBuilder, IConditionBuilder conditionBuilder)
+      : base(conditionBuilder)
     {
+      _selectStatementBuilder = selectStatementBuilder ?? throw new ArgumentNullException(nameof(selectStatementBuilder));
+
       Receive<HeliumConstructSqlQueryMessage>(HandleConstructSqlQueryMessage, message => message.HeliumAction == HeliumAction.Retrieve);
     }
 
     private void HandleConstructSqlQueryMessage(HeliumConstructSqlQueryMessage requestMessage)
     {
-      var dataModel = requestMessage.OriginalMessage.GetPropertyValue("DataModel");
-
-      ActorLogger.Log(LogLevel.InfoLevel, $"Constructing {requestMessage.HeliumAction} SQL Query for {dataModel.GetType().Name}");
-
-      var sqlQuery      = ConstructSelectStatement(dataModel);
-      var resultMessage = new HeliumConstructSqlQueryResultMessage(requestMessage.HeliumAction, sqlQuery, requestMessage.OriginalSender, requestMessage.OriginalMessage);
-
-      Sender.Tell(resultMessage, null);
+      ActorLogger.Log(LogLevel.InfoLevel, $"Constructing {requestMessage.HeliumAction} SQL Query for {requestMessage.DataModel.GetType().Name}");
+      
+      var sqlQuery      = ConstructSelectStatement(requestMessage.DataModel);
+      var resultMessage = new HeliumConstructSqlQueryResultMessage(requestMessage.HeliumAction, sqlQuery);
+      resultMessage.AddStateData(requestMessage.MessageStateData);
+      
+      Sender.Tell(resultMessage, Self);
     }
 
     private string ConstructSelectStatement(object dataModel)
@@ -40,7 +45,7 @@ namespace Thuria.Helium.Akka.Actors
       var dataModelColumns = dataModel.GetThuriaDataModelColumns(TharkAction.Retrieve);
       var whereCondition   = GetWhereConditionsForDataModel(TharkAction.Retrieve, dataModel);
 
-      var selectStatementBuilder = SelectStatementBuilder.Create.WithTable(dataModelTable);
+      var selectStatementBuilder = _selectStatementBuilder.WithTable(dataModelTable);
 
       foreach (var currentColumn in dataModelColumns)
       {

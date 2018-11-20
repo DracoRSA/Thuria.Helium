@@ -1,4 +1,4 @@
-﻿namespace Thuria.Helium.Akka.Core
+﻿namespace Thuria.Helium.Core
 {
   /// <summary>
   /// Helium Action enumeration
@@ -13,7 +13,12 @@
     /// <summary>
     /// Perform a retrieve
     /// </summary>
-    Retrieve
+    Retrieve,
+
+    /// <summary>
+    /// Perform an insert
+    /// </summary>
+    Insert
   }
 
   /// <summary>

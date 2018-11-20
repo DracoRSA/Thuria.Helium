@@ -1,5 +1,4 @@
-﻿using Akka.Actor;
-using Thuria.Helium.Akka.Core;
+﻿using Thuria.Helium.Core;
 
 namespace Thuria.Helium.Akka.Messages
 {
@@ -13,10 +12,7 @@ namespace Thuria.Helium.Akka.Messages
     /// </summary>
     /// <param name="heliumAction">Helium Action</param>
     /// <param name="sqlQuery">Created SQL Query</param>
-    /// <param name="originalSender"></param>
-    /// <param name="originalMessage"></param>
-    public HeliumConstructSqlQueryResultMessage(HeliumAction heliumAction, string sqlQuery, IActorRef originalSender, object originalMessage)
-      : base(originalSender, originalMessage)
+    public HeliumConstructSqlQueryResultMessage(HeliumAction heliumAction, string sqlQuery)
     {
       HeliumAction = heliumAction;
       SqlQuery     = sqlQuery;
