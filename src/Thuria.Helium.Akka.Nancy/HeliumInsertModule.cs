@@ -25,7 +25,7 @@ namespace Thuria.Helium.Akka.Nancy
     /// </summary>
     /// <param name="heliumActorSystem">Helium Actor System</param>
     /// <param name="thuriaSerializer">Thuria Serializer</param>
-    /// <param name="responseNegotiator">nancy Response Negotiator</param>
+    /// <param name="responseNegotiator">Nancy Response Negotiator</param>
     /// <param name="thuriaLogger">Thuria Logger</param>
     public HeliumInsertModule(IThuriaActorSystem heliumActorSystem, IThuriaSerializer thuriaSerializer, IResponseNegotiator responseNegotiator, IThuriaLogger thuriaLogger) 
       : base(thuriaSerializer, responseNegotiator, thuriaLogger)

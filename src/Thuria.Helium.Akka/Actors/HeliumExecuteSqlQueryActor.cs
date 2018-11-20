@@ -49,26 +49,40 @@ namespace Thuria.Helium.Akka.Actors
       var originalSender = (IActorRef)ExtractMessageStateData(resultMessage.MessageStateData, "Sender");
       var sqlQuery       = (string)ExtractMessageStateData(resultMessage.MessageStateData, "SqlQuery");
 
+      var heliumResult               = HeliumActionResult.Success;
+      var errorDetail                = string.Empty;
+      IEnumerable<object> resultData = null;
+
       try
       {
-        IEnumerable<object> resultData = null;
-
         switch (heliumAction)
         {
           case HeliumAction.Retrieve:
             resultData = ExecuteSelectSqlQuery(resultMessage.ConnectionString, sqlQuery);
             break;
 
+          case HeliumAction.Insert:
+            var rowsAffected = ExecuteSqlQuery(resultMessage.ConnectionString, sqlQuery);
+            if (rowsAffected <= 0)
+            {
+              heliumResult = HeliumActionResult.Warning;
+              errorDetail  = "No rows affected by Insert Action";
+            }
+            break;
+
           default:
             throw new Exception($"Helium Action [{heliumAction}] not currently supported");
         }
 
-        SendResultMessage(originalSender, heliumAction, HeliumActionResult.Success, resultData, resultData, resultMessage.MessageStateData);
       }
       catch (Exception runtimeException)
       {
-        SendResultMessage(originalSender, heliumAction, 
-                          HeliumActionResult.Error, errorDetail: runtimeException, messageStateData: resultMessage.MessageStateData);
+        heliumResult = HeliumActionResult.Error;
+        errorDetail = runtimeException.ToString();
+      }
+      finally
+      {
+        SendResultMessage(originalSender, heliumAction, heliumResult, resultData, errorDetail, resultMessage.MessageStateData);
       }
     }
 
@@ -79,6 +93,16 @@ namespace Thuria.Helium.Akka.Actors
                                                    .BuildReadonly())
       {
         return databaseContext.Select<object>(sqlQuery);
+      }
+    }
+
+    private int ExecuteSqlQuery(string connectionString, string sqlQuery)
+    {
+      using (var databaseContext = _databaseBuilder.WithDatabaseProviderType(DatabaseProviderType.SqlServer)
+                                                   .WithConnectionString(connectionString)
+                                                   .BuildReadonly())
+      {
+        return databaseContext.ExecuteSqlStatement(sqlQuery);
       }
     }
 

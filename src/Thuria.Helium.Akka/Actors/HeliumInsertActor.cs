@@ -57,7 +57,7 @@ namespace Thuria.Helium.Akka.Actors
     private void HandleExecuteSqlQueryResult(HeliumExecuteSqlQueryResultMessage executeSqlQueryResultMessage)
     {
       var originalSender      = (IActorRef)executeSqlQueryResultMessage.MessageStateData["OriginalInsertSender"];
-      var actionResultMessage = new HeliumActionResultMessage(HeliumActionResult.Success, executeSqlQueryResultMessage.ResultData, 
+      var actionResultMessage = new HeliumActionResultMessage(executeSqlQueryResultMessage.ActionResult, executeSqlQueryResultMessage.ResultData, 
                                                               executeSqlQueryResultMessage.ErrorDetail?.ToString());
 
       originalSender.Tell(actionResultMessage);

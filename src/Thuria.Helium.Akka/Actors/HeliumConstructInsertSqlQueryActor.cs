@@ -47,7 +47,13 @@ namespace Thuria.Helium.Akka.Actors
 
       foreach (var currentColumn in dataModelColumns)
       {
-        statementBuilder.WithColumn(currentColumn.ColumnName, dataModel.GetPropertyValue(currentColumn.PropertyName));
+        var propertyValue = dataModel.GetPropertyValue(currentColumn.PropertyName);
+        if (propertyValue.Equals(propertyValue.GetType().GetDefaultData()))
+        {
+          continue;
+        }
+
+        statementBuilder.WithColumn(currentColumn.ColumnName, propertyValue);
       }
       
       return statementBuilder.Build();

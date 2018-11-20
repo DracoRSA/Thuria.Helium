@@ -18,8 +18,10 @@ namespace Thuria.Helium.Akka.Structuremap
     public HeliumTharkIocRegistry()
     {
       For<IDatabaseBuilder>().Use<DatabaseBuilder>();
-      For<ISelectStatementBuilder>().Use<SelectStatementBuilder>();
       For<IConditionBuilder>().Use<ConditionBuilder>();
+
+      For<ISelectStatementBuilder>().Use<SelectStatementBuilder>();
+      For<IInsertStatementBuilder>().Use<InsertStatementBuilder>();
     }
   }
 }
