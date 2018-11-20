@@ -4,10 +4,96 @@
         <name>Thuria.Helium.Akka.Nancy</name>
     </assembly>
     <members>
+        <member name="T:Thuria.Helium.Akka.Nancy.HeliumBaseModule">
+            <summary>
+            Helium Nancy Base Module
+            </summary>
+        </member>
+        <member name="M:Thuria.Helium.Akka.Nancy.HeliumBaseModule.#ctor(Thuria.Zitidar.Core.IThuriaSerializer,Nancy.Responses.Negotiation.IResponseNegotiator,Thuria.Zitidar.Core.IThuriaLogger)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="thuriaSerializer">Thuria Serializer</param>
+            <param name="responseNegotiator">Nancy Response Negotiator</param>
+            <param name="thuriaLogger">Thuria Logger</param>
+        </member>
+        <member name="P:Thuria.Helium.Akka.Nancy.HeliumBaseModule.ThuriaSerializer">
+            <summary>
+            Thuria Serializer
+            </summary>
+        </member>
+        <member name="P:Thuria.Helium.Akka.Nancy.HeliumBaseModule.ThuriaLogger">
+            <summary>
+            Thuria Logger
+            </summary>
+        </member>
+        <member name="M:Thuria.Helium.Akka.Nancy.HeliumBaseModule.GetHeliumRequest">
+            <summary>
+            Retrieve and Validate the current Helium Request Data Model
+            </summary>
+            <returns>Helium Request Data Model</returns>
+        </member>
+        <member name="M:Thuria.Helium.Akka.Nancy.HeliumBaseModule.CreateResponse(Nancy.NancyContext,Nancy.HttpStatusCode,System.Object)">
+            <summary>
+            Create the Nancy Response
+            </summary>
+            <param name="nancyContext">Nancy Context</param>
+            <param name="statusCode">Http Response Status Code</param>
+            <param name="outputDataModel">Output Data Model</param>
+            <returns></returns>
+        </member>
+        <member name="T:Thuria.Helium.Akka.Nancy.HeliumInsertModule">
+            <summary>
+            Helium Insert Nancy Module
+            </summary>
+        </member>
+        <member name="M:Thuria.Helium.Akka.Nancy.HeliumInsertModule.#ctor(Thuria.Zitidar.Akka.IThuriaActorSystem,Thuria.Zitidar.Core.IThuriaSerializer,Nancy.Responses.Negotiation.IResponseNegotiator,Thuria.Zitidar.Core.IThuriaLogger)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="heliumActorSystem">Helium Actor System</param>
+            <param name="thuriaSerializer">Thuria Serializer</param>
+            <param name="responseNegotiator">nancy Response Negotiator</param>
+            <param name="thuriaLogger">Thuria Logger</param>
+        </member>
+        <member name="T:Thuria.Helium.Akka.Nancy.HeliumNancyBootstrapper">
+            <summary>
+            Helium nancy Bootstrapper
+            </summary>
+        </member>
+        <member name="M:Thuria.Helium.Akka.Nancy.HeliumNancyBootstrapper.#ctor(StructureMap.IContainer,System.Boolean)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="structuremapContainer">Structuremap IOC Container</param>
+            <param name="enableTracing">Enable Tracing indicator</param>
+        </member>
+        <member name="P:Thuria.Helium.Akka.Nancy.HeliumNancyBootstrapper.InternalConfiguration">
+            <summary>
+            Get the current Internal Configuration
+            </summary>
+        </member>
+        <member name="M:Thuria.Helium.Akka.Nancy.HeliumNancyBootstrapper.RequestStartup(StructureMap.IContainer,Nancy.Bootstrapper.IPipelines,Nancy.NancyContext)">
+            <summary>
+            Request Startup
+            </summary>
+            <param name="container">Ioc Container</param>
+            <param name="pipelines">Nancy Pipelines</param>
+            <param name="context">Nancy Context</param>
+        </member>
         <member name="T:Thuria.Helium.Akka.Nancy.HeliumRetrieveModule">
             <summary>
             Helium Retrieve Nancy Module
             </summary>
+        </member>
+        <member name="M:Thuria.Helium.Akka.Nancy.HeliumRetrieveModule.#ctor(Thuria.Zitidar.Akka.IThuriaActorSystem,Thuria.Zitidar.Core.IThuriaSerializer,Nancy.Responses.Negotiation.IResponseNegotiator,Thuria.Zitidar.Core.IThuriaLogger)">
+            <summary>
+            Helium Retrieve Module constructor
+            </summary>
+            <param name="heliumActorSystem">Thark Actor System</param>
+            <param name="thuriaSerializer">Thuria Serializer</param>
+            <param name="responseNegotiator">Response Negotiator</param>
+            <param name="thuriaLogger">Thuria Logger</param>
         </member>
     </members>
 </doc>

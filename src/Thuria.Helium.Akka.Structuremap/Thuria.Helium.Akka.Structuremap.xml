@@ -4,5 +4,35 @@
         <name>Thuria.Helium.Akka.Structuremap</name>
     </assembly>
     <members>
+        <member name="T:Thuria.Helium.Akka.Structuremap.HeliumAkkaIocRegistry">
+            <summary>
+            Helium Akka IOC Registry
+            </summary>
+        </member>
+        <member name="M:Thuria.Helium.Akka.Structuremap.HeliumAkkaIocRegistry.#ctor">
+            <summary>
+            Constructor
+            </summary>
+        </member>
+        <member name="T:Thuria.Helium.Akka.Structuremap.HeliumNancyIocRegistry">
+            <summary>
+            Helium Nancy Ioc Registry
+            </summary>
+        </member>
+        <member name="M:Thuria.Helium.Akka.Structuremap.HeliumNancyIocRegistry.#ctor">
+            <summary>
+            Constructor
+            </summary>
+        </member>
+        <member name="T:Thuria.Helium.Akka.Structuremap.HeliumTharkIocRegistry">
+            <summary>
+            Helium Thark IOC Registry
+            </summary>
+        </member>
+        <member name="M:Thuria.Helium.Akka.Structuremap.HeliumTharkIocRegistry.#ctor">
+            <summary>
+            Constructor
+            </summary>
+        </member>
     </members>
 </doc>
