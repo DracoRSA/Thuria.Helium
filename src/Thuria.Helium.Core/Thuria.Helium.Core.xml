@@ -49,17 +49,17 @@
             Action resulted in errors
             </summary>
         </member>
-        <member name="T:Thuria.Helium.Core.HeliumRequestModel">
+        <member name="T:Thuria.Helium.Core.HeliumRequest">
             <summary>
             Helium Request Model
             </summary>
         </member>
-        <member name="P:Thuria.Helium.Core.HeliumRequestModel.Action">
+        <member name="P:Thuria.Helium.Core.HeliumRequest.Action">
             <summary>
             Helium Action
             </summary>
         </member>
-        <member name="P:Thuria.Helium.Core.HeliumRequestModel.RequestData">
+        <member name="P:Thuria.Helium.Core.HeliumRequest.RequestData">
             <summary>
             Request Data
             </summary>

@@ -1,16 +1,13 @@
 ﻿using NUnit.Framework;
 using FluentAssertions;
 
-using Thuria.Helium.Akka.Core;
 using Thuria.Calot.TestUtilities;
-using Thuria.Helium.Akka.Core.Messages;
 using Thuria.Helium.Akka.Messages;
-using Thuria.Helium.Core;
 
 namespace Thuria.Helium.Akka.Tests.Messages
 {
   [TestFixture]
-  public class TestHeliumActionMessage
+  public class TestHeliumGetConnectionStringResultMessage
   {
     [Test]
     public void Constructor()
@@ -18,20 +15,18 @@ namespace Thuria.Helium.Akka.Tests.Messages
       //---------------Set up test pack-------------------
       //---------------Assert Precondition----------------
       //---------------Execute Test ----------------------
-      var actionMessage = new HeliumActionMessage(HeliumAction.None, new object());
+      var resultMessage = new HeliumGetConnectionStringResultMessage("ConnectionString");
       //---------------Test Result -----------------------
-      actionMessage.Should().NotBeNull();
+      resultMessage.Should().NotBeNull();
     }
 
-    [TestCase("heliumAction", "HeliumAction")]
-    [TestCase("dataModel", "DataModel")]
-    [TestCase("dbContextName", "DatabaseContextName")]
+    [TestCase("connectionString", "ConnectionString")]
     public void Constructor_GivenParameterValue_ShouldSetPropertyValue(string parameterName, string propertyName)
     {
       //---------------Set up test pack-------------------
       //---------------Assert Precondition----------------
       //---------------Execute Test ----------------------
-      ConstructorTestHelper.ValidatePropertySetWithParameter<HeliumActionMessage>(parameterName, propertyName);
+      ConstructorTestHelper.ValidatePropertySetWithParameter<HeliumGetConnectionStringResultMessage>(parameterName, propertyName);
       //---------------Test Result -----------------------
     }
   }

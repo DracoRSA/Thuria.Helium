@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.Concurrent;
 
 namespace Thuria.Helium.Akka.Messages
@@ -14,16 +15,22 @@ namespace Thuria.Helium.Akka.Messages
     /// <inheritdoc />
     public void AddStateData(string dataKey , object stateData)
     {
+      if (string.IsNullOrWhiteSpace(dataKey)) { throw new ArgumentNullException(nameof(dataKey)); }
+      if (stateData == null) { throw new ArgumentNullException(nameof(stateData)); }
+
       MessageStateData.Add(dataKey, stateData);
     }
 
     /// <inheritdoc />
-    public void AddStateData(IDictionary<string, object> stateData)
+    public void AddStateData(IDictionary<string, object> stateDataList)
     {
-      foreach (var currentStateData in stateData)
+      if (stateDataList == null) { throw new ArgumentNullException(nameof(stateDataList)); }
+
+      foreach (var currentStateData in stateDataList)
       {
         MessageStateData.Add(currentStateData.Key, currentStateData.Value);
       }
     }
   }
 }
+ 

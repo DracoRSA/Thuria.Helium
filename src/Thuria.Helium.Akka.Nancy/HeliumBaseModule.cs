@@ -45,7 +45,7 @@ namespace Thuria.Helium.Akka.Nancy
     /// Retrieve and Validate the current Helium Request Data Model
     /// </summary>
     /// <returns>Helium Request Data Model</returns>
-    protected (HeliumRequestModel, Response) GetHeliumRequest()
+    protected (HeliumRequest, Response) GetHeliumRequest()
     {
       if (Request.Body.Length <= 0)
       {
@@ -53,7 +53,7 @@ namespace Thuria.Helium.Akka.Nancy
       }
 
       var jsonData     = ((RequestStream)Request.Body).AsString();
-      var requestModel = ThuriaSerializer.DeserializeObject<HeliumRequestModel>(jsonData);
+      var requestModel = ThuriaSerializer.DeserializeObject<HeliumRequest>(jsonData);
 
       if (requestModel == null || requestModel.RequestData == null)
       {

@@ -3,7 +3,7 @@
   /// <summary>
   /// Helium Request Model
   /// </summary>
-  public class HeliumRequestModel
+  public class HeliumRequest
   {
     /// <summary>
     /// Helium Action

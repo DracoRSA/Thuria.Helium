@@ -1,14 +1,14 @@
 ﻿using NUnit.Framework;
 using FluentAssertions;
 
-using Thuria.Helium.Core;
 using Thuria.Calot.TestUtilities;
-using Thuria.Helium.Akka.Core.Messages;
+using Thuria.Helium.Akka.Messages;
+using Thuria.Helium.Core;
 
 namespace Thuria.Helium.Akka.Tests.Messages
 {
   [TestFixture]
-  public class TestHeliumActionResultMessage
+  public class TestHeliumExecuteSqlQueryResultMessage
   {
     [Test]
     public void Constructor()
@@ -16,18 +16,21 @@ namespace Thuria.Helium.Akka.Tests.Messages
       //---------------Set up test pack-------------------
       //---------------Assert Precondition----------------
       //---------------Execute Test ----------------------
-      var actionMessage = new HeliumActionResultMessage(HeliumActionResult.Unknown);
+      var executeSqlQueryMessage = new HeliumExecuteSqlQueryResultMessage(HeliumAction.Insert, HeliumActionResult.Error);
       //---------------Test Result -----------------------
-      actionMessage.Should().NotBeNull();
+      executeSqlQueryMessage.Should().NotBeNull();
     }
 
-    [TestCase("heliumActionResult", "HeliumActionResult")]
+    [TestCase("heliumAction", "HeliumAction")]
+    [TestCase("actionResult", "ActionResult")]
+    [TestCase("resultData", "ResultData")]
+    [TestCase("errorDetail", "ErrorDetail")]
     public void Constructor_GivenParameterValue_ShouldSetPropertyValue(string parameterName, string propertyName)
     {
       //---------------Set up test pack-------------------
       //---------------Assert Precondition----------------
       //---------------Execute Test ----------------------
-      ConstructorTestHelper.ValidatePropertySetWithParameter<HeliumActionResultMessage>(parameterName, propertyName);
+      ConstructorTestHelper.ValidatePropertySetWithParameter<HeliumExecuteSqlQueryResultMessage>(parameterName, propertyName);
       //---------------Test Result -----------------------
     }
   }
