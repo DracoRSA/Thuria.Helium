@@ -1,12 +1,20 @@
 ﻿using System;
+
 using Akka.Actor;
-using Akka.TestKit.NUnit3;
-using FluentAssertions;
+using StructureMap;
+using Akka.DI.Core;
+using Akka.DI.StructureMap;
+
 using NSubstitute;
 using NUnit.Framework;
+using FluentAssertions;
+using Akka.TestKit.NUnit3;
+
+using Thuria.Helium.Core;
+using Thuria.Zitidar.Core;
 using Thuria.Helium.Akka.Actors;
+using Thuria.Helium.Akka.Messages;
 using Thuria.Thark.Core.DataAccess;
-using Thuria.Thark.Core.Statement.Builders;
 
 namespace Thuria.Helium.Akka.Tests.Actors
 {
@@ -38,6 +46,36 @@ namespace Thuria.Helium.Akka.Tests.Actors
       EventFilter.Exception(typeof(ArgumentNullException), contains: "Parameter name: databaseBuilder", checkInnerExceptions: true)
                  .Expect(1, () => Sys.ActorOf(actorProps, "Test"));
       //---------------Test Result -----------------------
+    }
+
+    [Test]
+    public void HeliumExecuteSqlQueryMessage_GivenValidMessage_ShouldSendMessageToGetConnectionString()
+    {
+      //---------------Set up test pack-------------------
+      var actorRef               = CreateActor();
+      var executeSqlQueryMessage = new HeliumExecuteSqlQueryMessage("TestDbContext", HeliumAction.Retrieve, "SELECT * FROM [HeliumFake]");
+      //---------------Assert Precondition----------------
+      //---------------Execute Test ----------------------
+      actorRef.Tell(executeSqlQueryMessage);
+      //---------------Test Result -----------------------
+      ExpectMsg<HeliumExecuteSqlQueryResultMessage>();
+    }
+
+    private IActorRef CreateActor(IDatabaseBuilder databaseBuilder = null)
+    {
+      var databaseSettings = Substitute.For<IThuriaDatabaseSettings>();
+      databaseSettings.GetConnectionString("TestDbContext").Returns("TestConnectionString");
+
+      var container = new Container(
+        expression =>
+          {
+            expression.For<IThuriaDatabaseSettings>().Use(databaseSettings);
+            expression.For<IDatabaseBuilder>().Use(databaseBuilder ?? Substitute.For<IDatabaseBuilder>());
+          });
+      var dependencyResolver = new StructureMapDependencyResolver(container, Sys);
+
+      var actorProps = Sys.DI().Props<HeliumExecuteSqlQueryActor>();
+      return Sys.ActorOf(actorProps, "Test");
     }
   }
 }

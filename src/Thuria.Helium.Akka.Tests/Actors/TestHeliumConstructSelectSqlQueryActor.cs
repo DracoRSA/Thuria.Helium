@@ -110,7 +110,7 @@ namespace Thuria.Helium.Akka.Tests.Actors
       var selectStatementBuilder = statementBuilder ?? Substitute.For<ISelectStatementBuilder>();
       var selectConditionBuilder = conditionBuilder ?? Substitute.For<IConditionBuilder>();
 
-      var actorProps = Props.Create<HeliumConstructSelectSqlQueryActor>(selectStatementBuilder, conditionBuilder);
+      var actorProps = Props.Create<HeliumConstructSelectSqlQueryActor>(selectStatementBuilder, selectConditionBuilder);
       return Sys.ActorOf(actorProps, "Test");
     }
   }
