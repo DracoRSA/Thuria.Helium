@@ -1,0 +1,13 @@
+﻿<SolutionConfiguration>
+  <Settings>
+    <AllowParallelTestExecution>True</AllowParallelTestExecution>
+    <MetricsExclusionList>
+      <Value>Thuria.Helium.Akka.Core.Tests\Thuria.Helium.Akka.Core.Tests.csproj</Value>
+      <Value>Thuria.Helium.Akka.Nancy.Tests\Thuria.Helium.Akka.Nancy.Tests.csproj</Value>
+      <Value>Thuria.Helium.Akka.Structuremap.Tests\Thuria.Helium.Akka.Structuremap.Tests.csproj</Value>
+      <Value>Thuria.Helium.Akka.Tests\Thuria.Helium.Akka.Tests.csproj</Value>
+      <Value>Thuria.Helium.Core.Tests\Thuria.Helium.Core.Tests.csproj</Value>
+    </MetricsExclusionList>
+    <SolutionConfigured>True</SolutionConfigured>
+  </Settings>
+</SolutionConfiguration>

@@ -28,16 +28,6 @@ namespace Thuria.Helium.Akka.Actors
     protected HeliumAction HeliumAction { get; private set; }
 
     /// <summary>
-    /// Original Sending Actor
-    /// </summary>
-    protected IActorRef OriginalSender { get; set; }
-
-    /// <summary>
-    /// Original Helium Action Message
-    /// </summary>
-    protected HeliumActionMessage HeliumActionMessage { get; set; }
-
-    /// <summary>
     /// Make sre the actor is in a state to Perform the required action
     /// </summary>
     protected virtual void ReadyToPerformAction()
@@ -65,10 +55,6 @@ namespace Thuria.Helium.Akka.Actors
     private void HandleHeliumAction(HeliumActionMessage actionMessage)
     {
       ActorLogger.Log(LogLevel.InfoLevel, $"Starting Helium Action : {actionMessage.HeliumAction}");
-
-      OriginalSender      = Sender;
-      HeliumActionMessage = actionMessage;
-
       StartHeliumActionProcessing(actionMessage);
     }
   }

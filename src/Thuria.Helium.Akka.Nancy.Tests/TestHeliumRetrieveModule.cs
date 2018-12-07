@@ -5,7 +5,9 @@ using FluentAssertions;
 using Thuria.Zitidar.Akka;
 using Thuria.Zitidar.Core;
 using Nancy.Responses.Negotiation;
+using StructureMap;
 using Thuria.Calot.TestUtilities;
+using Thuria.Zitidar.Structuremap;
 
 namespace Thuria.Helium.Akka.Nancy.Tests
 {
@@ -38,6 +40,43 @@ namespace Thuria.Helium.Akka.Nancy.Tests
       //---------------Execute Test ----------------------
       ConstructorTestHelper.ValidateArgumentNullExceptionIfParameterIsNull<HeliumRetrieveModule>(parameterName);
       //---------------Test Result -----------------------
+    }
+
+    [Test]
+    public void Retrieve_GivenEmptyBody_ShouldReturnBadRequest()
+    {
+      //---------------Set up test pack-------------------
+      
+      //---------------Assert Precondition----------------
+
+      //---------------Execute Test ----------------------
+
+      //---------------Test Result -----------------------
+      Assert.Fail("Test Not Yet Implemented");
+    }
+
+    private IThuriaIocContainer CreateIocContainer()
+    {
+      var container = new Container(
+        expression =>
+          {
+            expression.For<IThuriaIocContainer>().Use<StructuremapThuriaIocContainer>();
+          });
+
+      var iocContainer = container.GetInstance<IThuriaIocContainer>();
+      iocContainer.Should().NotBeNull();
+      return iocContainer;
+    }
+
+    private NancyTestBootstrapper CreateNancyTestBootstrapper(IThuriaIocContainer iocContainer)
+    {
+      var instanceContainer = iocContainer.GetInstance<IContainer>();
+      Assert.IsNotNull(instanceContainer);
+
+      var bootstrapper = new NancyTestBootstrapper(instanceContainer);
+      bootstrapper.AddInstanceToContainer(typeof(IExperianDataManager), experianDataManager);
+
+      return bootstrapper;
     }
   }
 }

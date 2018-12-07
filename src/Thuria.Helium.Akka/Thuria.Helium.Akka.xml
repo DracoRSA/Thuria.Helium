@@ -20,16 +20,6 @@
             Helium Action supported by this Actor
             </summary>
         </member>
-        <member name="P:Thuria.Helium.Akka.Actors.HeliumActionActorBase.OriginalSender">
-            <summary>
-            Original Sending Actor
-            </summary>
-        </member>
-        <member name="P:Thuria.Helium.Akka.Actors.HeliumActionActorBase.HeliumActionMessage">
-            <summary>
-            Original Helium Action Message
-            </summary>
-        </member>
         <member name="M:Thuria.Helium.Akka.Actors.HeliumActionActorBase.ReadyToPerformAction">
             <summary>
             Make sre the actor is in a state to Perform the required action
