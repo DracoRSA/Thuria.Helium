@@ -103,7 +103,7 @@ namespace Thuria.Helium.Akka.Tests.Actors
           Description = RandomValueGenerator.CreateRandomString(1, 10),
           IsActive    = RandomValueGenerator.CreateRandomBoolean()
         };
-      var expectedSqlQuery = $"INSERT INTO [HeliumFake] ([Id],[Description]) VALUES ('{heliumFakeDataModel.Id}','{heliumFakeDataModel.Description}')";
+      var expectedSqlQuery = $"INSERT INTO [HeliumFake] ([Id],[Description],[IsActive]) VALUES ('{heliumFakeDataModel.Id}','{heliumFakeDataModel.Description}',1)";
       var actorRef         = CreateActor(InsertStatementBuilder.Create, ConditionBuilder.Create);
       var sqlQueryMessage  = new HeliumConstructSqlQueryMessage(HeliumAction.Insert, heliumFakeDataModel);
       //---------------Assert Precondition----------------

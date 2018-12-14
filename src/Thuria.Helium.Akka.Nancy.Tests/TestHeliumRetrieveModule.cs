@@ -2,10 +2,11 @@
 using NUnit.Framework;
 using FluentAssertions;
 
+using StructureMap;
+
 using Thuria.Zitidar.Akka;
 using Thuria.Zitidar.Core;
 using Nancy.Responses.Negotiation;
-using StructureMap;
 using Thuria.Calot.TestUtilities;
 using Thuria.Zitidar.Structuremap;
 
@@ -74,7 +75,7 @@ namespace Thuria.Helium.Akka.Nancy.Tests
       Assert.IsNotNull(instanceContainer);
 
       var bootstrapper = new NancyTestBootstrapper(instanceContainer);
-      bootstrapper.AddInstanceToContainer(typeof(IExperianDataManager), experianDataManager);
+      // bootstrapper.AddInstanceToContainer(typeof(IExperianDataManager), experianDataManager);
 
       return bootstrapper;
     }
