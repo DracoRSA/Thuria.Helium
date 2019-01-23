@@ -5,7 +5,7 @@
     <Authors>Johan Dercksen</Authors>
     <Company>Draco</Company>
     <Product>Thuria</Product>
-    <Version>0.0.1-beta</Version>
+    <Version>0.0.2-beta</Version>
     <PackageProjectUrl>https://github.com/DracoRSA/Thuria.Helium</PackageProjectUrl>
     <RepositoryUrl>https://github.com/DracoRSA/Thuria.Helium</RepositoryUrl>
     <RepositoryType>git</RepositoryType>

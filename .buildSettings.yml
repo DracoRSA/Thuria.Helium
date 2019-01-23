@@ -3,26 +3,26 @@ CONFIGURATION: Debug
 NUGETPACKAGES:
   - HeliumCore:
     Name: Helium.Core
-    Version: 0.0.1
+    Version: 0.0.3
     Location: src/Thuria.Helium.Core
     IsBeta: true
   - HeliumAkkaCore:
     Name: Helium.Akka.Core
-    Version: 0.0.1
+    Version: 0.0.2
     Location: src/Thuria.Helium.Akka.Core
     IsBeta: true
   - HeliumAkka:
     Name: Helium.Akka
-    Version: 0.0.1
+    Version: 0.0.2
     Location: src/Thuria.Helium.Akka
     IsBeta: true
   - HeliumAkkaNancy:
     Name: Helium.Akka.Nancy
-    Version: 0.0.1
+    Version: 0.0.2
     Location: src/Thuria.Helium.Akka.Nancy
     IsBeta: true
   - HeliumAkkaStructuremap:
     Name: Helium.Akka.Structuremap
-    Version: 0.0.1
+    Version: 0.0.2
     Location: src/Thuria.Helium.Akka.Structuremap
     IsBeta: true
