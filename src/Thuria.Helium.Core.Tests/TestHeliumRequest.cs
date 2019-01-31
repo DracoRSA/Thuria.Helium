@@ -21,6 +21,7 @@ namespace Thuria.Helium.Core.Tests
 
     [TestCase("Action")]
     [TestCase("RequestData")]
+    [TestCase("DbContext")]
     public void Properties_GivenValue_ShouldSetPropertyValue(string propertyName)
     {
       //---------------Set up test pack-------------------

@@ -14,5 +14,10 @@
     /// Request Data
     /// </summary>
     public object RequestData { get; set; }
+
+    /// <summary>
+    /// Database Context Name
+    /// </summary>
+    public string DbContext { get; set; }
   }
 }
